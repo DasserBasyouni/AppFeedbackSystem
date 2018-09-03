@@ -3,7 +3,7 @@
     package="com.tech.futureteric.feedbacklibrary">
 
     <application>
-        <activity android:name=".ui.FeedbackSystemActivity"></activity>
+        <activity android:name=".ui.butterknife.FeedbackSystemActivity"></activity>
     </application>
 
 </manifest>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">App Feedback System</string>
+    <string name="label_frequently_asked_questions">Frequently Asked Questions</string>
+    <string name="label_feature_request">Feature Request</string>
+    <string name="label_general_feedback">General Feedback</string>
+    <string name="label_bug_report">Bug Report</string>
+    <string name="label_contact_us">Contact Us</string>
 </resources>
