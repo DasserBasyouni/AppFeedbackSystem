@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.tech.futureteric.feedbacklibrary.constants.LibEnums;
 import com.tech.futureteric.feedbacklibrary.ui.butterknife.FeedbackSystemActivity;
+import com.tech.futureteric.feedbacklibrary.utils.FeedbackSystemViewSetup;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
 import static com.tech.futureteric.feedbacklibrary.constants.LibEnums.AUTO_DISPOSE;
@@ -14,7 +16,8 @@ import static com.tech.futureteric.feedbacklibrary.constants.LibEnums.R_X_BINDIN
 
 public class FeedbackSystemBuilder {
 
-    private @LibEnums.Sections int[] mSections;
+    private @LibEnums.Sections
+    static int[] mSections;
     private @LibEnums.ViewBinder int mViewBinder;
 
     public FeedbackSystemBuilder() {}
@@ -52,7 +55,18 @@ public class FeedbackSystemBuilder {
         activity.startActivity(intent);
     }
 
-    private Bundle getFeedbackSystemBundle() {
+    public static void buildThenShowDialog(Activity activity){
+
+        MaterialDialog dialog = new MaterialDialog.Builder(activity)
+                .title("Feedback")
+                .customView(R.layout.activity_feedback_system, true)
+                .show();
+
+        // TODO test this function working without crashing
+        new FeedbackSystemViewSetup().setupView(activity, getFeedbackSystemBundle(), dialog.getContentView());
+    }
+
+    private static Bundle getFeedbackSystemBundle() {
         Bundle bundle = new Bundle();
         // TODO test casting array to parcelable is not crashing
         bundle.putIntArray(BUNDLE_SECTIONS, mSections);

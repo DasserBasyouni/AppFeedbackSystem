@@ -21,8 +21,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // ui
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
+    // support
     implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    // fixed versions avoidance
+    implementation 'com.android.support:recyclerview-v7:28.0.0-rc02'
 
     // ViewBinders
     implementation 'com.jakewharton:butterknife:8.8.1'

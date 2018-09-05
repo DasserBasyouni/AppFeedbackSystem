@@ -13,4 +13,6 @@ public class CheckingInputsUtils {
         if (!bundle.containsKey(BUNDLE_SECTIONS))
             throw new NullPointerException("FeedbackSystemBuilder.withSections() is required");
     }
+
+
 }
