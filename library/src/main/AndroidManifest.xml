@@ -3,7 +3,11 @@
     package="com.tech.futureteric.feedbacklibrary">
 
     <application>
-        <activity android:name=".ui.butterknife.FeedbackSystemActivity"></activity>
+
+        <activity
+            android:name=".ui.butterknife.FeedbackSystemActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
     </application>
 
 </manifest>
