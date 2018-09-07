@@ -5,7 +5,7 @@
     <application>
 
         <activity
-            android:name=".ui.butterknife.FeedbackSystemActivity"
+            android:name=".ui.FeedbackSystemActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
     </application>
