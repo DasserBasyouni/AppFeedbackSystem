@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">sample</string>
+    <string name="label_launch_feedback_system">Launch Feedback System</string>
 </resources>

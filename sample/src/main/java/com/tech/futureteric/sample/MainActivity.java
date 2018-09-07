@@ -15,9 +15,22 @@ import static com.tech.futureteric.feedbacklibrary.constants.LibEnums.ALL;
 
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R.id.button) Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FeedbackSystemBuilder()
+                        .withSections(new int[]{LibEnums.ALL})
+                        .buildThenShowDialog(MainActivity.this);
+            }
+        });
+
     }
 }
