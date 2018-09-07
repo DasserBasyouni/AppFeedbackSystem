@@ -17,10 +17,4 @@ public class LibEnums {
     public static final int BUG_REPORT = 4;
     public static final int ALL = 5;
 
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({BUTTER_KNIFE, R_X_BINDING, AUTO_DISPOSE})
-    public @interface ViewBinder {}
-    public static final int BUTTER_KNIFE = 0;
-    public static final int R_X_BINDING = 1;
-    public static final int AUTO_DISPOSE = 2;
 }

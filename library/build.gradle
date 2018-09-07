@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 28
@@ -22,6 +21,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // ui
+    // material-dialogs not upgraded to 2.0.0-alpha06 to support API 15
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
     // support
@@ -30,10 +30,6 @@ dependencies {
 
     // fixed versions avoidance
     implementation 'com.android.support:recyclerview-v7:28.0.0-rc02'
-
-    // ViewBinders
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
