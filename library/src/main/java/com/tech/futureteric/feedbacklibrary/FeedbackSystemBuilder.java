@@ -45,17 +45,14 @@ public class FeedbackSystemBuilder {
         Button mBugReport_button = view.findViewById(R.id.button_bugReport);
         Button mContactUs_button = view.findViewById(R.id.button_contactUs);
 
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle b = new Bundle();
-                b.putString(BUNDLE_CLICKED_SECTION, ((Button) view).getText().toString());
-                b.putIntArray(BUNDLE_SECTIONS, mSections);
+        View.OnClickListener listener = buttonView -> {
+            Bundle b = new Bundle();
+             b.putString(BUNDLE_CLICKED_SECTION, buttonView.getTag().toString());
+            b.putIntArray(BUNDLE_SECTIONS, mSections);
 
-                Intent i = new Intent(activity, FeedbackSystemActivity.class);
-                i.putExtras(b);
-                activity.startActivity(i);
-            }
+            Intent i = new Intent(activity, FeedbackSystemActivity.class);
+            i.putExtras(b);
+            activity.startActivity(i);
         };
 
 

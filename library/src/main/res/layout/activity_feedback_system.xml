@@ -14,7 +14,7 @@
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <Spinner
             android:id="@+id/spinner"
@@ -32,6 +32,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:tag="0"
         android:text="@string/label_frequently_asked_questions"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +49,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:tag="1"
         android:text="@string/label_feature_request"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,6 +67,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:tag="2"
         android:text="@string/label_general_feedback"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +84,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:tag="3"
         android:text="@string/label_bug_report"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,6 +102,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:tag="4"
         android:text="@string/label_contact_us"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
