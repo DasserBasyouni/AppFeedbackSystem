@@ -11,18 +11,26 @@ import com.tech.futureteric.feedbacklibrary.constants.LibEnums;
 import com.tech.futureteric.feedbacklibrary.ui.FeedbackSystemActivity;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_RECEIVER_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
 import static com.tech.futureteric.feedbacklibrary.utils.CheckingInputsUtils.checkFeedbackSystemActivityBundle;
 
 public class FeedbackSystemBuilder {
 
-    private @LibEnums.Sections
-    int[] mSections;
+    private @LibEnums.Sections int[] mSections;
+    private String mEmail;
 
     public FeedbackSystemBuilder() {}
 
     public  FeedbackSystemBuilder withSections(@LibEnums.Sections int[] sections){
         mSections = sections;
+        return this;
+    }
+
+    public FeedbackSystemBuilder setReceiverEmail(String email){
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
+            throw new IllegalArgumentException("FeedbackSystemBuilder: Invalid receiver email");
+        mEmail = email;
         return this;
     }
 
@@ -46,12 +54,10 @@ public class FeedbackSystemBuilder {
         Button mContactUs_button = view.findViewById(R.id.button_contactUs);
 
         View.OnClickListener listener = buttonView -> {
-            Bundle b = new Bundle();
-             b.putString(BUNDLE_CLICKED_SECTION, buttonView.getTag().toString());
-            b.putIntArray(BUNDLE_SECTIONS, mSections);
+            bundle.putString(BUNDLE_CLICKED_SECTION, buttonView.getTag().toString());
 
             Intent i = new Intent(activity, FeedbackSystemActivity.class);
-            i.putExtras(b);
+            i.putExtras(bundle);
             activity.startActivity(i);
         };
 
@@ -104,8 +110,8 @@ public class FeedbackSystemBuilder {
 
     private Bundle getFeedbackSystemBundle() {
         Bundle bundle = new Bundle();
-        // TODO test casting array to parcelable is not crashing
         bundle.putIntArray(BUNDLE_SECTIONS, mSections);
+        bundle.putString(BUNDLE_RECEIVER_EMAIL, mEmail);
         return bundle;
     }
 }

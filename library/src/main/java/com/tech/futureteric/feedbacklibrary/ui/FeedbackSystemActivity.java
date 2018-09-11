@@ -1,13 +1,14 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.tech.futureteric.feedbacklibrary.R;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_RECEIVER_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
 
 public class FeedbackSystemActivity extends AppCompatActivity {
@@ -47,8 +49,17 @@ public class FeedbackSystemActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // TODO launch fragments of feedback system
-                Toast.makeText(FeedbackSystemActivity.this, "items is selected", Toast.LENGTH_SHORT).show();
+                String sectionName = (((TextView) view).getText().toString());
+                String email = getIntent().getExtras().getString(BUNDLE_RECEIVER_EMAIL);
+
+                Fragment fragment = null;
+                if (sectionName.equals(getString(R.string.label_bug_report))
+                        || sectionName.equals(getString(R.string.label_general_feedback))
+                        || sectionName.equals(getString(R.string.label_contact_us))){
+                    fragment = SimilarFeedbackFragment.newInstance(sectionName, email);
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,
+                        fragment).commit();}
             }
 
             @Override
@@ -65,31 +76,31 @@ public class FeedbackSystemActivity extends AppCompatActivity {
 
         assert sections != null;
         for (int section : sections) {
-            String sectionName = null;
+            String sectionType = null;
             switch (section) {
                 case 0:
-                    sectionName = "Frequently Asked Questions";
+                    sectionType = getString(R.string.label_frequently_asked_questions);
                     break;
                 case 1:
-                    sectionName = "Feature Request";
+                    sectionType = getString(R.string.label_feature_request);
                     break;
                 case 2:
-                    sectionName = "General Feedback";
+                    sectionType = getString(R.string.label_general_feedback);
                     break;
                 case 3:
-                    sectionName = "Contact Us";
+                    sectionType = getString(R.string.label_bug_report);
                     break;
                 case 4:
-                    sectionName = "Bug Report";
+                    sectionType = getString(R.string.label_contact_us);
                     break;
                 case 5:
-                    sectionName = "ALL";
+                    sectionType = "ALL";
                     break;
             }
 
-            assert sectionName != null;
-            if (!sectionName.equals("ALL"))
-                list.add(sectionName);
+            assert sectionType != null;
+            if (!sectionType.equals("ALL"))
+                list.add(sectionType);
             else {
                 return new ArrayList<String>() {{
                     add("Frequently Asked Questions");
