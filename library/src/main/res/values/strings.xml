@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">App Feedback System</string>
 
     <string name="label_frequently_asked_questions">Frequently Asked Questions</string>

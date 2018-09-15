@@ -1,6 +1,6 @@
 package com.tech.futureteric.feedbacklibrary;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,17 +34,17 @@ public class FeedbackSystemBuilder {
         return this;
     }
 
-    public void buildThenShowDialog(Activity activity){
-        MaterialDialog dialog = new MaterialDialog.Builder(activity)
+    public void buildThenShowDialog(Context context){
+        MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title("Feedback")
                 .customView(R.layout.dialog_feedback_system, true)
                 .show();
 
         assert dialog.getCustomView() != null;
-        setupDialogView(activity, getFeedbackSystemBundle(), dialog.getCustomView());
+        setupDialogView(context, getFeedbackSystemBundle(), dialog.getCustomView());
     }
 
-    private void setupDialogView(final Activity activity, Bundle bundle, View view) {
+    private void setupDialogView(final Context context, Bundle bundle, View view) {
         checkFeedbackSystemActivityBundle(bundle);
 
         Button mFAQ_button = view.findViewById(R.id.button_fAQ);
@@ -56,12 +56,10 @@ public class FeedbackSystemBuilder {
         View.OnClickListener listener = buttonView -> {
             bundle.putString(BUNDLE_CLICKED_SECTION, buttonView.getTag().toString());
 
-            Intent i = new Intent(activity, FeedbackSystemActivity.class);
+            Intent i = new Intent(context, FeedbackSystemActivity.class);
             i.putExtras(bundle);
-            activity.startActivity(i);
+            context.startActivity(i);
         };
-
-
 
         @LibEnums.Sections int[] sections = bundle.getIntArray(BUNDLE_SECTIONS);
         assert sections != null;
