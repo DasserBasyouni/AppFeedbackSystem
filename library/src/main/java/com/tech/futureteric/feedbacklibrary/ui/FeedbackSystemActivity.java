@@ -15,8 +15,10 @@ import com.tech.futureteric.feedbacklibrary.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
-import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_RECEIVER_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CONTACT_US_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
 
 public class FeedbackSystemActivity extends AppCompatActivity {
@@ -50,16 +52,28 @@ public class FeedbackSystemActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String sectionName = (((TextView) view).getText().toString());
-                String email = getIntent().getExtras().getString(BUNDLE_RECEIVER_EMAIL);
 
                 Fragment fragment = null;
-                if (sectionName.equals(getString(R.string.label_bug_report))
-                        || sectionName.equals(getString(R.string.label_general_feedback))
+                if (sectionName.equals(getString(R.string.label_general_feedback))
+                        || sectionName.equals(getString(R.string.label_bug_report))
                         || sectionName.equals(getString(R.string.label_contact_us))){
-                    fragment = SimilarFeedbackFragment.newInstance(sectionName, email);
+                    fragment = SimilarFeedbackFragment.newInstance(sectionName, getSectionEmail(sectionName));
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,
                         fragment).commit();}
+            }
+
+            private String getSectionEmail(String sectionName) {
+                String email = null;
+
+                if (sectionName.equals(getString(R.string.label_general_feedback)))
+                    email = getIntent().getExtras().getString(BUNDLE_GENERAL_FEEDBACK_EMAIL);
+                else if (sectionName.equals(getString(R.string.label_bug_report)))
+                    email = getIntent().getExtras().getString(BUNDLE_BUG_REPORT_EMAIL);
+                else if (sectionName.equals(getString(R.string.label_contact_us)))
+                    email = getIntent().getExtras().getString(BUNDLE_CONTACT_US_EMAIL);
+
+                return email;
             }
 
             @Override
@@ -69,6 +83,7 @@ public class FeedbackSystemActivity extends AppCompatActivity {
         });
     }
 
+    //TODO fix detecting sections
     private List<String> getSpinnerList(Bundle bundle) {
         int[] sections = bundle.getIntArray(BUNDLE_SECTIONS);
 

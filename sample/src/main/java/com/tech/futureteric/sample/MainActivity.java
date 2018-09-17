@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.tech.futureteric.feedbacklibrary.FeedbackSystemBuilder;
-import com.tech.futureteric.feedbacklibrary.constants.LibEnums;
+import com.tech.futureteric.feedbacklibrary.Section;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,8 +21,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         button.setOnClickListener(view -> new FeedbackSystemBuilder()
-                .withSections(new int[]{LibEnums.ALL})
-                .setReceiverEmail("dasserbasyouni@gmail.com")
+                .addSection(new Section.FrequentlyAskedQuestions(null))
+                .addSection(new Section.FeatureRequest(null))
+                .addSection(new Section.GeneralFeedback("dasserbasyouni@gmail.com"))
+                .addSection(new Section.BugReport("dasserbasyouni@gmail.com"))
+                .addSection(new Section.ContactUs("dasserbasyouni@gmail.com"))
                 .buildThenShowDialog(MainActivity.this)
         );
     }

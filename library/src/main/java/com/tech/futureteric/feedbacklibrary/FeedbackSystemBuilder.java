@@ -10,15 +10,20 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.tech.futureteric.feedbacklibrary.constants.LibEnums;
 import com.tech.futureteric.feedbacklibrary.ui.FeedbackSystemActivity;
 
+import java.util.ArrayList;
+
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
-import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_RECEIVER_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CONTACT_US_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FAQ_LIST;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
 import static com.tech.futureteric.feedbacklibrary.utils.CheckingInputsUtils.checkFeedbackSystemActivityBundle;
 
-public class FeedbackSystemBuilder {
+public class FeedbackSystemBuilder{
 
     private @LibEnums.Sections int[] mSections;
-    private String mEmail;
+    private Bundle bundle;
 
     public FeedbackSystemBuilder() {}
 
@@ -27,10 +32,30 @@ public class FeedbackSystemBuilder {
         return this;
     }
 
-    public FeedbackSystemBuilder setReceiverEmail(String email){
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
-            throw new IllegalArgumentException("FeedbackSystemBuilder: Invalid receiver email");
-        mEmail = email;
+    public FeedbackSystemBuilder addSection(Section section) {
+        bundle = getFeedbackSystemBundle();
+
+        if (section instanceof Section.FrequentlyAskedQuestions) {
+            bundle.putStringArrayList(BUNDLE_FAQ_LIST,
+                    (ArrayList<String>) ((Section.FrequentlyAskedQuestions) section).questionsAndAnswersList);
+
+        } else if (section instanceof Section.FeatureRequest) {
+            // TODO make Section.FeatureRequest functional
+           /* bundle.putStringArrayList(BUNDLE_FAQ_LIST,
+                    (ArrayList<String>) ((Section.FeatureRequest) section).questionsAndAnswers);*/
+
+        }  else if (section instanceof Section.GeneralFeedback) {
+            bundle.putString(BUNDLE_GENERAL_FEEDBACK_EMAIL, ((Section.GeneralFeedback) section).email);
+
+        } else if (section instanceof Section.BugReport) {
+            bundle.putString(BUNDLE_BUG_REPORT_EMAIL, ((Section.BugReport) section).email);
+
+        } else if (section instanceof Section.ContactUs) {
+            bundle.putString(BUNDLE_CONTACT_US_EMAIL, ((Section.ContactUs) section).email);
+
+        } else
+            throw new IllegalArgumentException("Unknown Section Type: " + section);
+
         return this;
     }
 
@@ -41,7 +66,7 @@ public class FeedbackSystemBuilder {
                 .show();
 
         assert dialog.getCustomView() != null;
-        setupDialogView(context, getFeedbackSystemBundle(), dialog.getCustomView());
+        setupDialogView(context, bundle, dialog.getCustomView());
     }
 
     private void setupDialogView(final Context context, Bundle bundle, View view) {
@@ -107,9 +132,10 @@ public class FeedbackSystemBuilder {
     }
 
     private Bundle getFeedbackSystemBundle() {
-        Bundle bundle = new Bundle();
-        bundle.putIntArray(BUNDLE_SECTIONS, mSections);
-        bundle.putString(BUNDLE_RECEIVER_EMAIL, mEmail);
+        if (bundle == null) {
+            Bundle bundle = new Bundle();
+            bundle.putIntArray(BUNDLE_SECTIONS, mSections);
+        }
         return bundle;
     }
 }
