@@ -26,16 +26,18 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':library')
 
+    // ui
+    implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayuotLib"
+
     // butterKnife
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation "com.jakewharton:butterknife:$versions.butterKnifeLib"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$versions.butterKnifeLib"
 
     // support
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "com.android.support:appcompat-v7:$versions.supportLib"
 
     // mixed versions avoidance
-    implementation 'com.android.support:recyclerview-v7:28.0.0-rc02'
+    implementation "com.android.support:recyclerview-v7:$versions.supportLib"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

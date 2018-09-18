@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,8 +13,7 @@ import android.widget.TextView;
 
 import com.tech.futureteric.feedbacklibrary.R;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
@@ -40,13 +40,14 @@ public class FeedbackSystemActivity extends AppCompatActivity {
         assert bundle != null;
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, getSpinnerList(bundle));
+                android.R.layout.simple_spinner_item,
+                Objects.requireNonNull(bundle.getStringArrayList(BUNDLE_SECTIONS)));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
 
-        spinner.setSelection(Integer.parseInt(bundle.getString(BUNDLE_CLICKED_SECTION)));
+        spinner.setSelection(bundle.getInt(BUNDLE_CLICKED_SECTION));
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -81,53 +82,6 @@ public class FeedbackSystemActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    //TODO fix detecting sections
-    private List<String> getSpinnerList(Bundle bundle) {
-        int[] sections = bundle.getIntArray(BUNDLE_SECTIONS);
-
-        List<String> list = new ArrayList<>();
-
-        assert sections != null;
-        for (int section : sections) {
-            String sectionType = null;
-            switch (section) {
-                case 0:
-                    sectionType = getString(R.string.label_frequently_asked_questions);
-                    break;
-                case 1:
-                    sectionType = getString(R.string.label_feature_request);
-                    break;
-                case 2:
-                    sectionType = getString(R.string.label_general_feedback);
-                    break;
-                case 3:
-                    sectionType = getString(R.string.label_bug_report);
-                    break;
-                case 4:
-                    sectionType = getString(R.string.label_contact_us);
-                    break;
-                case 5:
-                    sectionType = "ALL";
-                    break;
-            }
-
-            assert sectionType != null;
-            if (!sectionType.equals("ALL"))
-                list.add(sectionType);
-            else {
-                return new ArrayList<String>() {{
-                    add("Frequently Asked Questions");
-                    add("Feature Request");
-                    add("General Feedback");
-                    add("Contact Us");
-                    add("Bug Report");
-                }};
-            }
-        }
-
-        return list;
     }
 
 }

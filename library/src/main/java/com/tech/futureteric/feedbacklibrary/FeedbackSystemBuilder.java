@@ -3,14 +3,14 @@ package com.tech.futureteric.feedbacklibrary;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.tech.futureteric.feedbacklibrary.constants.LibEnums;
+import com.tech.futureteric.feedbacklibrary.adapter.FeedbackDialogAdapter;
 import com.tech.futureteric.feedbacklibrary.ui.FeedbackSystemActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
@@ -18,33 +18,35 @@ import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FAQ_LIST;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
-import static com.tech.futureteric.feedbacklibrary.utils.CheckingInputsUtils.checkFeedbackSystemActivityBundle;
 
-public class FeedbackSystemBuilder{
+public class FeedbackSystemBuilder {
 
-    private @LibEnums.Sections int[] mSections;
+    private List<String> mSections;
     private Bundle bundle;
 
-    public FeedbackSystemBuilder() {}
-
-    public  FeedbackSystemBuilder withSections(@LibEnums.Sections int[] sections){
-        mSections = sections;
-        return this;
+    public FeedbackSystemBuilder() {
     }
 
+
     public FeedbackSystemBuilder addSection(Section section) {
-        bundle = getFeedbackSystemBundle();
+        if (bundle == null)
+            bundle = new Bundle();
+        bundle.putStringArrayList(BUNDLE_SECTIONS, (ArrayList<String>) mSections);
+
+        if (mSections == null)
+            mSections = new ArrayList<>();
+        mSections.add(section.getClass().getSimpleName());
 
         if (section instanceof Section.FrequentlyAskedQuestions) {
-            bundle.putStringArrayList(BUNDLE_FAQ_LIST,
-                    (ArrayList<String>) ((Section.FrequentlyAskedQuestions) section).questionsAndAnswersList);
+            bundle.putStringArrayList(BUNDLE_FAQ_LIST, (ArrayList<String>)
+                    ((Section.FrequentlyAskedQuestions) section).questionsAndAnswersList);
 
         } else if (section instanceof Section.FeatureRequest) {
             // TODO make Section.FeatureRequest functional
            /* bundle.putStringArrayList(BUNDLE_FAQ_LIST,
                     (ArrayList<String>) ((Section.FeatureRequest) section).questionsAndAnswers);*/
 
-        }  else if (section instanceof Section.GeneralFeedback) {
+        } else if (section instanceof Section.GeneralFeedback) {
             bundle.putString(BUNDLE_GENERAL_FEEDBACK_EMAIL, ((Section.GeneralFeedback) section).email);
 
         } else if (section instanceof Section.BugReport) {
@@ -59,83 +61,18 @@ public class FeedbackSystemBuilder{
         return this;
     }
 
-    public void buildThenShowDialog(Context context){
-        MaterialDialog dialog = new MaterialDialog.Builder(context)
-                .title("Feedback")
-                .customView(R.layout.dialog_feedback_system, true)
-                .show();
-
-        assert dialog.getCustomView() != null;
-        setupDialogView(context, bundle, dialog.getCustomView());
-    }
-
-    private void setupDialogView(final Context context, Bundle bundle, View view) {
-        checkFeedbackSystemActivityBundle(bundle);
-
-        Button mFAQ_button = view.findViewById(R.id.button_fAQ);
-        Button mFeatureRequest_button = view.findViewById(R.id.button_featureRequest);
-        Button mGeneralFeedback_button = view.findViewById(R.id.button_generalFeedback);
-        Button mBugReport_button = view.findViewById(R.id.button_bugReport);
-        Button mContactUs_button = view.findViewById(R.id.button_contactUs);
-
-        View.OnClickListener listener = buttonView -> {
-            bundle.putString(BUNDLE_CLICKED_SECTION, buttonView.getTag().toString());
-
-            Intent i = new Intent(context, FeedbackSystemActivity.class);
-            i.putExtras(bundle);
-            context.startActivity(i);
-        };
-
-        @LibEnums.Sections int[] sections = bundle.getIntArray(BUNDLE_SECTIONS);
-        assert sections != null;
-        for (int section : sections) {
-            switch (section) {
-                case LibEnums.ALL:
-                    mFAQ_button.setVisibility(View.VISIBLE);
-                    mFAQ_button.setOnClickListener(listener);
-                    mFeatureRequest_button.setVisibility(View.VISIBLE);
-                    mFeatureRequest_button.setOnClickListener(listener);
-                    mGeneralFeedback_button.setVisibility(View.VISIBLE);
-                    mGeneralFeedback_button.setOnClickListener(listener);
-                    mBugReport_button.setVisibility(View.VISIBLE);
-                    mBugReport_button.setOnClickListener(listener);
-                    mContactUs_button.setVisibility(View.VISIBLE);
-                    mContactUs_button.setOnClickListener(listener);
-                    break;
-
-                case LibEnums.FREQUENTLY_ASKED_QUESTIONS:
-                    mFAQ_button.setVisibility(View.VISIBLE);
-                    mFAQ_button.setOnClickListener(listener);
-                    break;
-
-                case LibEnums.FEATURE_REQUEST:
-                    mFeatureRequest_button.setVisibility(View.VISIBLE);
-                    mFeatureRequest_button.setOnClickListener(listener);
-                    break;
-
-                case LibEnums.GENERAL_FEEDBACK:
-                    mGeneralFeedback_button.setVisibility(View.VISIBLE);
-                    mGeneralFeedback_button.setOnClickListener(listener);
-                    break;
-
-                case LibEnums.BUG_REPORT:
-                    mBugReport_button.setVisibility(View.VISIBLE);
-                    mBugReport_button.setOnClickListener(listener);
-                    break;
-
-                case LibEnums.CONTACT_US:
-                    mContactUs_button.setVisibility(View.VISIBLE);
-                    mContactUs_button.setOnClickListener(listener);
-                    break;
-            }
+    public void buildThenShowDialog(Context context) {
+        if (mSections.size() > 1)
+            new MaterialDialog.Builder(context)
+                    .title("Feedback")
+                    .adapter(new FeedbackDialogAdapter(mSections, bundle), new LinearLayoutManager(context))
+                    .show();
+        else {
+            bundle.putString(BUNDLE_CLICKED_SECTION, mSections.get(0));
+            Intent intent = new Intent(context, FeedbackSystemActivity.class);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
         }
     }
 
-    private Bundle getFeedbackSystemBundle() {
-        if (bundle == null) {
-            Bundle bundle = new Bundle();
-            bundle.putIntArray(BUNDLE_SECTIONS, mSections);
-        }
-        return bundle;
-    }
 }
