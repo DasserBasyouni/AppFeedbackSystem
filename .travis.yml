@@ -5,8 +5,10 @@ android:
     - platform-tools
 before_install:
  - chmod +x gradlew
- - yes | sdkmanager "platforms;android-28"
-licenses:
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
+  # Download SDK
+  - yes | sdkmanager "tools" &>/dev/null
+  - yes | sdkmanager "platform-tools" &>/dev/null
+  - yes | sdkmanager "platforms;android-28" &>/dev/null
+  # Update remaining dependencies and accept licenses
+  - yes | sdkmanager --update &>/dev/null
+  - yes | sdkmanager --licenses &>/dev/null
