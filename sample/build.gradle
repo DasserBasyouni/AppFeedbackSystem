@@ -7,6 +7,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
+        multiDexEnabled true
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -26,6 +27,10 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':library')
 
+    // fireBase
+    implementation 'com.google.firebase:firebase-core:16.0.3'
+    implementation 'com.google.firebase:firebase-firestore:17.1.0'
+
     // ui
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayuotLib"
 
@@ -36,10 +41,15 @@ dependencies {
     // support
     implementation "com.android.support:appcompat-v7:$versions.supportLib"
 
+    // multi-dex
+    implementation 'com.android.support:multidex:1.0.3'
+
     // mixed versions avoidance
-    implementation "com.android.support:recyclerview-v7:$versions.supportLib"
+    //implementation "com.android.support:recyclerview-v7:$versions.supportLib"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+apply plugin: 'com.google.gms.google-services'

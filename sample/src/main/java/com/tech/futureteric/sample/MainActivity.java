@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.tech.futureteric.feedbacklibrary.FeedbackSystemBuilder;
 import com.tech.futureteric.feedbacklibrary.Section;
 
@@ -28,11 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         button.setOnClickListener(view -> new FeedbackSystemBuilder()
                 .addSection(new Section.FrequentlyAskedQuestions(test))
-                .addSection(new Section.FeatureRequest(test))
+                .addSection(new Section.FeatureRequest( FirebaseFirestore.getInstance(),12345))
                 .addSection(new Section.GeneralFeedback("dasserbasyouni@gmail.com"))
                 .addSection(new Section.BugReport("dasserbasyouni@gmail.com"))
                 .addSection(new Section.ContactUs("dasserbasyouni@gmail.com"))
                 .buildThenShowDialog(MainActivity.this)
         );
     }
+
 }

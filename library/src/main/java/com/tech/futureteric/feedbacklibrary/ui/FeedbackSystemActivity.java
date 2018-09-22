@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +17,7 @@ import java.util.Objects;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CONTACT_US_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FEATURE_REQUEST_USER_UID;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
 
@@ -55,13 +55,17 @@ public class FeedbackSystemActivity extends AppCompatActivity {
                 String sectionName = (((TextView) view).getText().toString());
 
                 Fragment fragment = null;
-                if (sectionName.equals(getString(R.string.label_general_feedback))
-                        || sectionName.equals(getString(R.string.label_bug_report))
-                        || sectionName.equals(getString(R.string.label_contact_us))){
-                    fragment = SimilarFeedbackFragment.newInstance(sectionName, getSectionEmail(sectionName));
+                if (sectionName.equals(getString(R.string.label_general_feedback)) || sectionName.equals(getString(R.string.label_bug_report))
+                        || sectionName.equals(getString(R.string.label_contact_us)))
+                    fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName));
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,
-                        fragment).commit();}
+                else if (sectionName.endsWith(getString(R.string.label_feature_request)))
+                    fragment = FeatureRequestFragment.newInstance(getIntent().getExtras()
+                            .getInt(BUNDLE_FEATURE_REQUEST_USER_UID));
+
+                if (fragment != null)
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,
+                        fragment).commit();
             }
 
             private String getSectionEmail(String sectionName) {

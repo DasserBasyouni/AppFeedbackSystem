@@ -1,5 +1,7 @@
 package com.tech.futureteric.feedbacklibrary;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.List;
 
 public class Section {
@@ -13,9 +15,12 @@ public class Section {
     }
 
     public static class FeatureRequest extends Section {
+        FirebaseFirestore firebaseFirestore;
+        int userUid;
 
-        public FeatureRequest(Object o) {
-
+        public FeatureRequest(FirebaseFirestore firebaseFirestore, int userUid) {
+            this.firebaseFirestore = firebaseFirestore;
+            this.userUid = userUid;
         }
 
     }

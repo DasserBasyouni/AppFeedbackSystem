@@ -9,4 +9,7 @@ public class LibConstants {
     public final static String BUNDLE_GENERAL_FEEDBACK_EMAIL = "general_feedback_email";
     public final static String BUNDLE_BUG_REPORT_EMAIL = "bug_report_email";
     public final static String BUNDLE_CONTACT_US_EMAIL = "contact_us_email";
+    public final static String BUNDLE_FEATURE_REQUEST_USER_UID = "feature_request_user_uid";
+
+    public final static String BUNDLE_USER_UID = "user_uid";
 }

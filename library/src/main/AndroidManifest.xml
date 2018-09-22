@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.tech.futureteric.feedbacklibrary">
 
     <application>
 
-        <activity
-            android:name=".ui.FeedbackSystemActivity"
+        <activity android:name=".ui.FeedbackSystemActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- TODO test parent activity up button is working the same in api 15 and 16 -->
+        <activity android:name=".ui.FirestoreForumActivity"
+            android:parentActivityName=".ui.FeedbackSystemActivity"
+            tools:targetApi="jelly_bean" />
 
     </application>
 

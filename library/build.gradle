@@ -29,8 +29,12 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayuotLib"
 
+    // databass
+    implementation 'com.google.firebase:firebase-firestore:17.1.0'
+
     // other libs
     //implementation 'com.zendesk.belvedere2:belvedere:2.1.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
     // support
     implementation "com.android.support:appcompat-v7:$versions.supportLib"
@@ -38,7 +42,7 @@ dependencies {
     implementation "com.android.support:design:$versions.supportLib"
 
     // fixed versions avoidance
-    implementation "com.android.support:recyclerview-v7:$versions.supportLib"
+    //implementation "com.android.support:recyclerview-v7:$versions.supportLib"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

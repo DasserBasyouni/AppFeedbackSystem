@@ -15,14 +15,14 @@ import com.tech.futureteric.feedbacklibrary.adapter.FaqAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FaqFeedbackFragment extends Fragment {
+public class FaqFragment extends Fragment {
 
     private static final String ARG_FAQ_LIST = "faq_list";
 
-    public FaqFeedbackFragment() {}
+    public FaqFragment() {}
 
-    public static FaqFeedbackFragment newInstance(List<String> faqList) {
-        FaqFeedbackFragment fragment = new FaqFeedbackFragment();
+    public static FaqFragment newInstance(List<String> faqList) {
+        FaqFragment fragment = new FaqFragment();
         Bundle args = new Bundle();
         args.putStringArrayList(ARG_FAQ_LIST, (ArrayList<String>) faqList);
         fragment.setArguments(args);
@@ -33,7 +33,7 @@ public class FaqFeedbackFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_faq_feedbacsk, container, false);
+        View view = inflater.inflate(R.layout.fragment_faq, container, false);
 
         List<String> faqList = null;
         if (getArguments() != null)

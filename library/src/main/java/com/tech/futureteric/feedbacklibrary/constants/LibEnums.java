@@ -8,13 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 public class LibEnums {
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({FREQUENTLY_ASKED_QUESTIONS, FEATURE_REQUEST, GENERAL_FEEDBACK, CONTACT_US, BUG_REPORT, ALL})
-    public @interface Sections {}
-    public static final int FREQUENTLY_ASKED_QUESTIONS = 0;
-    public static final int FEATURE_REQUEST = 1;
-    public static final int GENERAL_FEEDBACK = 2;
-    public static final int CONTACT_US = 3;
-    public static final int BUG_REPORT = 4;
-    public static final int ALL = 5;
+    @IntDef({EMAIL, TEXT})
+    public @interface InputType {}
+    public static final int EMAIL = 0;
+    public static final int TEXT = 1;
 
 }
