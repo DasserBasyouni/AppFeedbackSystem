@@ -5,10 +5,10 @@ android:
     - platform-tools
 before_install:
  - chmod +x gradlew
-  # Download SDK
-  - yes | sdkmanager "tools"
-  - yes | sdkmanager "platform-tools"
-  - yes | sdkmanager "platforms;android-28"
-  # Update remaining dependencies and accept licenses
-  - yes | sdkmanager --update
-  - yes | sdkmanager --licenses
+ # Download SDK:
+ - yes | sdkmanager "tools"
+ - yes | sdkmanager "platform-tools"
+ - yes | sdkmanager "platforms;android-28"
+ # Update remaining dependencies and accept licenses
+ - yes | sdkmanager --update
+ - yes | sdkmanager --licenses
