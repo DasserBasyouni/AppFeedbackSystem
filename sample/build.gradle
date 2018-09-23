@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    lintOptions {
+        abortOnError false
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.tech.futureteric.sample"
