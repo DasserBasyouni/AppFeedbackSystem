@@ -6,9 +6,9 @@ android:
 before_install:
  - chmod +x gradlew
   # Download SDK
-  - yes | sdkmanager "tools" &>/dev/null
-  - yes | sdkmanager "platform-tools" &>/dev/null
-  - yes | sdkmanager "platforms;android-28" &>/dev/null
+  - yes | sdkmanager "tools"
+  - yes | sdkmanager "platform-tools"
+  - yes | sdkmanager "platforms;android-28"
   # Update remaining dependencies and accept licenses
-  - yes | sdkmanager --update &>/dev/null
-  - yes | sdkmanager --licenses &>/dev/null
+  - yes | sdkmanager --update
+  - yes | sdkmanager --licenses
