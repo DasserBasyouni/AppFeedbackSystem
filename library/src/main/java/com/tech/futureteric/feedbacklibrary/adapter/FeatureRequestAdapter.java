@@ -2,7 +2,6 @@ package com.tech.futureteric.feedbacklibrary.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +46,9 @@ public class FeatureRequestAdapter extends RecyclerView.Adapter<FeatureRequestAd
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Forum currentFeature = mRequests.get(i);
 
-        viewHolder.featureTitle.setText(Html.fromHtml(currentFeature.getTitle()));
-        viewHolder.featureDescription.setText(Html.fromHtml(currentFeature.getDescription()));
-        viewHolder.votesCount.setText(Html.fromHtml(currentFeature.getVoteCount()));
+        viewHolder.featureTitle.setText(currentFeature.getTitle());
+        viewHolder.featureDescription.setText(currentFeature.getDescription());
+        viewHolder.votesCount.setText(String.valueOf(currentFeature.getVoteCount()));
     }
 
     @Override
