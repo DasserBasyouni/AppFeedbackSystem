@@ -1,14 +1,20 @@
 language: android
+
+env:
+  global:
+    - ADB_INSTALL_TIMEOUT=8
+
 android:
   components:
     - tools
     - platform-tools
+    
 before_install:
  - chmod +x gradlew
  # Download SDK:
- - yes | sdkmanager "tools"
- - yes | sdkmanager "platform-tools"
- - yes | sdkmanager "platforms;android-28"
+ - yes | sdkmanager "tools" &>/dev/null
+ - yes | sdkmanager "platform-tools" &>/dev/null
+ - yes | sdkmanager "platforms;android-28" &>/dev/null
  # Update remaining dependencies and accept licenses
- - yes | sdkmanager --update
- - yes | sdkmanager --licenses
+ - yes | sdkmanager --update &>/dev/null
+ - yes | sdkmanager --licenses &>/dev/null
