@@ -18,3 +18,4 @@ before_install:
  # Update remaining dependencies and accept licenses
  - yes | sdkmanager --update &>/dev/null
  - yes | sdkmanager --licenses &>/dev/null
+ - android-wait-for-emulator
