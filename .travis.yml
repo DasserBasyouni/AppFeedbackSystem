@@ -11,6 +11,7 @@ android:
     
 before_install:
  - chmod +x gradlew
+ - android-wait-for-emulator
  # Download SDK:
  - yes | sdkmanager "tools" &>/dev/null
  - yes | sdkmanager "platform-tools" &>/dev/null
@@ -18,4 +19,6 @@ before_install:
  # Update remaining dependencies and accept licenses
  - yes | sdkmanager --update &>/dev/null
  - yes | sdkmanager --licenses &>/dev/null
- - android-wait-for-emulator
+ # Setup emulator
+ - echo "no" | avdmanager create avd --force -n test -k "system-images;android-19;default;armeabi-v7a" &>/dev/null
+ - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window & &>/dev/null
