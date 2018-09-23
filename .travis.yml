@@ -15,13 +15,16 @@ before_install:
  - yes | sdkmanager "tools" &>/dev/null
  - yes | sdkmanager "platform-tools" &>/dev/null
  - yes | sdkmanager "platforms;android-28" &>/dev/null
+ # Download emulator
+ - yes | sdkmanager "platforms;android-28" &>/dev/null
+ - yes | sdkmanager "system-images;android-28;default;armeabi-v7a" &>/dev/null
  # Update remaining dependencies and accept licenses
  - yes | sdkmanager --update &>/dev/null
  - yes | sdkmanager --licenses &>/dev/null
 
 before_script:
  # Setup emulator
- - echo no | android create avd --force -n test android-27 --abi armeabi-v7a
+ - echo no | android create avd --force -n test android-28 --abi armeabi-v7a
  - emulator -avd test -no-audio -no-window &
  - android-wait-for-emulator
  - adb shell input keyevent 82 &
