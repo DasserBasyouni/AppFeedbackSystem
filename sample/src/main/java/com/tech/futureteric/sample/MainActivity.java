@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.tech.futureteric.feedbacklibrary.FeedbackSystemBuilder;
+import com.tech.futureteric.feedbacklibrary.builder.FeedbackSystemBuilder;
 import com.tech.futureteric.feedbacklibrary.Section;
 
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 .addSection(new Section.GeneralFeedback("dasserbasyouni@gmail.com"))
                 .addSection(new Section.BugReport("dasserbasyouni@gmail.com"))
                 .addSection(new Section.ContactUs("dasserbasyouni@gmail.com"))
+                .dialogWithTitleAndSentence("Feedback", "We care about you")
                 .buildThenShowDialog(MainActivity.this)
         );
     }

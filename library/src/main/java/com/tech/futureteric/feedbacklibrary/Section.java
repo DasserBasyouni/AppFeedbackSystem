@@ -7,7 +7,7 @@ import java.util.List;
 public class Section {
 
     public static class FrequentlyAskedQuestions extends Section {
-        List<String> questionsAndAnswersList;
+        public List<String> questionsAndAnswersList;
 
         public FrequentlyAskedQuestions(List<String> questionsAndAnswersList) {
             this.questionsAndAnswersList = questionsAndAnswersList;
@@ -15,8 +15,8 @@ public class Section {
     }
 
     public static class FeatureRequest extends Section {
-        FirebaseFirestore firebaseFirestore;
-        int userUid;
+        public FirebaseFirestore firebaseFirestore;
+        public int userUid;
 
         public FeatureRequest(FirebaseFirestore firebaseFirestore, int userUid) {
             this.firebaseFirestore = firebaseFirestore;
@@ -26,7 +26,7 @@ public class Section {
     }
 
     public static class GeneralFeedback extends Section {
-        String email;
+        public String email;
 
         public GeneralFeedback(String email) {
             this.email = email;
@@ -34,7 +34,7 @@ public class Section {
     }
 
     public static class BugReport extends Section {
-        String email;
+        public String email;
 
         public BugReport(String email) {
             this.email = email;
@@ -42,7 +42,7 @@ public class Section {
     }
 
     public static class ContactUs extends Section {
-        String email;
+        public String email;
 
         public ContactUs(String email) {
             this.email = email;

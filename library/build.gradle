@@ -29,8 +29,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // ui
-    // material-dialogs not upgraded to 2.0.0-alpha06 to support API 15
-    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayuotLib"
 
     // databass

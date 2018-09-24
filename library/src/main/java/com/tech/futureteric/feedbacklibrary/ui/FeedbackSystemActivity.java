@@ -32,6 +32,8 @@ public class FeedbackSystemActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setTitle("");
 
+        //setTheme(R.style.FeedbackLibTheme);
+
         setupSpinner();
     }
 
