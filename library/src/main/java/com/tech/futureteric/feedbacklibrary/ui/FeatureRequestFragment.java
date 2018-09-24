@@ -20,7 +20,7 @@ import static com.tech.futureteric.feedbacklibrary.database.FireStoreUtils.liste
 
 public class FeatureRequestFragment extends Fragment {
 
-    private FirebaseFirestore db;
+    private View rootView;
 
     public FeatureRequestFragment() {}
 
@@ -41,13 +41,13 @@ public class FeatureRequestFragment extends Fragment {
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onMessageEvent(FirebaseFirestore firestore) {
         EventBus.getDefault().unregister(this);
-        db = firestore;
+        listenToFeatureRequestListAndUpdateRV(getActivity(), firestore, rootView);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_feature_request, container, false);
+        rootView = inflater.inflate(R.layout.fragment_feature_request, container, false);
 
         if (getArguments() != null) {
             rootView.findViewById(R.id.fab_createFeatureRequest).setOnClickListener(v -> {
@@ -57,8 +57,6 @@ public class FeatureRequestFragment extends Fragment {
             });
         } else
             throw new NullPointerException("Bundle is equal to null");
-
-        listenToFeatureRequestListAndUpdateRV(getActivity(), db, rootView);
 
         return rootView;
     }
