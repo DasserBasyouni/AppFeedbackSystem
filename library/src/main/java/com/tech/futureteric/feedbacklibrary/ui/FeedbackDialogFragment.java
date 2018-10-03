@@ -1,6 +1,7 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
-import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,7 +40,9 @@ public class FeedbackDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.fragment_feedback_dialog, null);
+        View view = inflater.inflate(R.layout.fragment_feedback_dialog, container, false);
+
+        Objects.requireNonNull(getDialog().getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         ((TextView)view.findViewById(R.id.textView_dialogTitle))
                 .setText(Objects.requireNonNull(getArguments()).getString(ARG_DIALOG_TITLE));

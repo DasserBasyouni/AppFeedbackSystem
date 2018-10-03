@@ -38,12 +38,6 @@ public class FeatureRequestFragment extends Fragment {
         EventBus.getDefault().register(this);
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(FirebaseFirestore firestore) {
-        EventBus.getDefault().unregister(this);
-        listenToFeatureRequestListAndUpdateRV(getActivity(), firestore, rootView);
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,5 +53,11 @@ public class FeatureRequestFragment extends Fragment {
             throw new NullPointerException("Bundle is equal to null");
 
         return rootView;
+    }
+
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(FirebaseFirestore firestore) {
+        EventBus.getDefault().unregister(this);
+        listenToFeatureRequestListAndUpdateRV(getActivity(), firestore, rootView);
     }
 }

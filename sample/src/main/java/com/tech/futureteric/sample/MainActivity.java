@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 .addSection(new Section.BugReport("dasserbasyouni@gmail.com"))
                 .addSection(new Section.ContactUs("dasserbasyouni@gmail.com"))
                 .dialogWithTitleAndSentence("Feedback", "We care about you")
+                .enableColorfulButtons(true)
                 .buildThenShowDialog(MainActivity.this)
         );
     }
