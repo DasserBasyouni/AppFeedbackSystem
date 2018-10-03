@@ -31,8 +31,8 @@ dependencies {
     implementation project(':library')
 
     // fireBase
-    implementation 'com.google.firebase:firebase-core:16.0.3'
-    implementation 'com.google.firebase:firebase-firestore:17.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-firestore:17.1.1'
 
     // ui
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayuotLib"

@@ -32,7 +32,7 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayuotLib"
 
     // databass
-    implementation 'com.google.firebase:firebase-firestore:17.1.0'
+    implementation 'com.google.firebase:firebase-firestore:17.1.1'
 
     // other libs
     //implementation 'com.zendesk.belvedere2:belvedere:2.1.0'
