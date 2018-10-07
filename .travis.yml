@@ -7,24 +7,19 @@ env:
 android:
   components:
     - tools
-    - platform-tools
+    - build-tools-28.0.2
+    - android-28
     
 before_install:
  - chmod +x gradlew
  # Download SDK:
- - yes | sdkmanager "tools" &>/dev/null
- - yes | sdkmanager "platform-tools" &>/dev/null
- - yes | sdkmanager "platforms;android-28" &>/dev/null
- # Download emulator
- - yes | sdkmanager "platforms;android-28" &>/dev/null
- - yes | sdkmanager "system-images;android-28;default;armeabi-v7a" &>/dev/null
- # Update remaining dependencies and accept licenses
- - yes | sdkmanager --update &>/dev/null
- - yes | sdkmanager --licenses &>/dev/null
+ - yes | sdkmanager "platforms;android-28"
+ - yes | sdkmanager "build-tools;28.0.2"
+ 
+jdk:
+    - oraclejdk8
 
-before_script:
- # Setup emulator
- - echo no | android create avd --force -n test android-28 --abi armeabi-v7a
- - emulator -avd test -no-audio -no-window &
- - android-wait-for-emulator
- - adb shell input keyevent 82 &
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
