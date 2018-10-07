@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
-import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_COLORFUL_BUTTONS;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ENABLE_COLORFUL_FEEDBACK;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CONTACT_US_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CUSTOM_COLORS_LIST;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FAQ_LIST;
@@ -83,12 +83,13 @@ public class FeedbackSystemBuilder {
         }
     }
 
-    public FeedbackSystemBuilder enableColorfulButtons(boolean colorfulButtons) {
-        getBundle().putBoolean(BUNDLE_COLORFUL_BUTTONS, colorfulButtons);
+    public FeedbackSystemBuilder enableColorfulFeedback(boolean colorfulButtons) {
+        getBundle().putBoolean(BUNDLE_ENABLE_COLORFUL_FEEDBACK, colorfulButtons);
         return this;
     }
 
-    public FeedbackSystemBuilder setCustomColorfulButtons(List<Integer> customColorsList) {
+    public FeedbackSystemBuilder setCustomColorfulFeedback(List<Integer> customColorsList) {
+        getBundle().putBoolean(BUNDLE_ENABLE_COLORFUL_FEEDBACK, true);
         getBundle().putIntegerArrayList(BUNDLE_CUSTOM_COLORS_LIST, (ArrayList<Integer>) customColorsList);
         return this;
     }

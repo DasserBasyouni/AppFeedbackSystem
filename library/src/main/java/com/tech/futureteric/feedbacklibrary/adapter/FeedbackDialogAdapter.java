@@ -18,8 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
-import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_COLORFUL_BUTTONS;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ENABLE_COLORFUL_FEEDBACK;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CUSTOM_COLORS_LIST;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTION_COLOR;
+import static com.tech.futureteric.feedbacklibrary.utils.UiUtils.getSectionColorId;
 
 public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAdapter.ViewHolder>{
 
@@ -50,13 +52,15 @@ public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAd
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         String sectionName = mFeedbackSections.get(i);
 
-        if (mBundle.getBoolean(BUNDLE_COLORFUL_BUTTONS))
+        if (mBundle.getBoolean(BUNDLE_ENABLE_COLORFUL_FEEDBACK))
             enableColorfulButtons(sectionName, mBundle.getIntegerArrayList(BUNDLE_CUSTOM_COLORS_LIST)
                     , viewHolder, i);
 
         viewHolder.button.setText(sectionName);
         viewHolder.button.setOnClickListener(view -> {
             mBundle.putInt(BUNDLE_CLICKED_SECTION, i);
+            mBundle.putInt(BUNDLE_SECTION_COLOR, getSectionColorId(view.getContext(), sectionName,
+                    mBundle.getIntegerArrayList(BUNDLE_CUSTOM_COLORS_LIST), i));
 
             Intent intent = new Intent(view.getContext(), FeedbackSystemActivity.class);
             intent.putExtras(mBundle);
@@ -90,7 +94,7 @@ public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAd
                 viewHolder.button.setBackgroundTintList(ContextCompat
                         .getColorStateList(context, customColorsList.get(currentPosition)));
             else
-                throw new NullPointerException("You must specify all buttons colors of used sections withing using setCustomColorfulButtons(List<Integer>) - missing color for section button number "
+                throw new NullPointerException("You must specify all buttons colors of used sections withing using setCustomColorfulFeedback(List<Integer>) - missing color for section button number "
                         + currentPosition+1);
         }
 

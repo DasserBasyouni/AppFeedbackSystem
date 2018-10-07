@@ -4,8 +4,9 @@ public class LibConstants {
 
     public final static String BUNDLE_SECTIONS = "sections";
     public final static String BUNDLE_CLICKED_SECTION = "clicked_section";
-    public final static String BUNDLE_COLORFUL_BUTTONS = "colorful_buttons";
+    public final static String BUNDLE_ENABLE_COLORFUL_FEEDBACK = "enable_colorful_feedback";
     public final static String BUNDLE_CUSTOM_COLORS_LIST = "custom_colors_list";
+    public final static String BUNDLE_SECTION_COLOR = "section_color";
 
     public final static String BUNDLE_FAQ_LIST = "faq_list";
     public final static String BUNDLE_GENERAL_FEEDBACK_EMAIL = "general_feedback_email";
