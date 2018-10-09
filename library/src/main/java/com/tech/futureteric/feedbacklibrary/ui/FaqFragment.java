@@ -15,16 +15,21 @@ import com.tech.futureteric.feedbacklibrary.adapter.FaqAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ACCENT_COLOR;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_PRIMARY_COLOR;
+
 public class FaqFragment extends Fragment {
 
     private static final String ARG_FAQ_LIST = "faq_list";
 
     public FaqFragment() {}
 
-    public static FaqFragment newInstance(List<String> faqList) {
+    public static FaqFragment newInstance(List<String> faqList, int colorPrimary, int colorAccent) {
         FaqFragment fragment = new FaqFragment();
         Bundle args = new Bundle();
         args.putStringArrayList(ARG_FAQ_LIST, (ArrayList<String>) faqList);
+        args.putInt(BUNDLE_PRIMARY_COLOR, colorPrimary);
+        args.putInt(BUNDLE_ACCENT_COLOR, colorAccent);
         fragment.setArguments(args);
         return fragment;
     }

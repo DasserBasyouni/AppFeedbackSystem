@@ -43,6 +43,7 @@ public class FeedbackDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_feedback_dialog, container, false);
 
         Objects.requireNonNull(getDialog().getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        setCancelable(true);
 
         ((TextView)view.findViewById(R.id.textView_dialogTitle))
                 .setText(Objects.requireNonNull(getArguments()).getString(ARG_DIALOG_TITLE));

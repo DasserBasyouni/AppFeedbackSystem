@@ -37,8 +37,6 @@ public class FireStoreUtils {
                     if (queryDocumentSnapshots != null)
                         requests = queryDocumentSnapshots.toObjects(Forum.class);
 
-                    Log.e("Z_", "requests: " + requests);
-
                     setupTheView(rootView, requests);
                 });
     }

@@ -1,11 +1,14 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,8 @@ import com.tech.futureteric.feedbacklibrary.constants.LibEnums;
 
 import java.util.Objects;
 
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ACCENT_COLOR;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_PRIMARY_COLOR;
 import static com.tech.futureteric.feedbacklibrary.utils.Utils.getApplicationName;
 import static com.tech.futureteric.feedbacklibrary.utils.ValidationUtils.isEditTextInputValid;
 
@@ -27,11 +32,14 @@ public class EmailForumFragment extends Fragment {
 
     public EmailForumFragment() {}
 
-    public static EmailForumFragment newInstance(String sectionName, String receiverEmail) {
+    public static EmailForumFragment newInstance(String sectionName, String receiverEmail,
+                                                 int colorPrimary, int colorAccent) {
         EmailForumFragment fragment = new EmailForumFragment();
         Bundle args = new Bundle();
         args.putString(ARG_SECTION_NAME, sectionName);
         args.putString(ARG_RECEIVER_EMAIL, receiverEmail);
+        args.putInt(BUNDLE_PRIMARY_COLOR, colorPrimary);
+        args.putInt(BUNDLE_ACCENT_COLOR, colorAccent);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,8 +61,13 @@ public class EmailForumFragment extends Fragment {
     }
 
     public void setupView(View rootView, String sectionName, String receiverEmail) {
-        rootView.findViewById(R.id.fab_sendForum).setOnClickListener(view1 -> {
+        FloatingActionButton fab = rootView.findViewById(R.id.fab_sendForum);
+        fab.setBackgroundTintList(ColorStateList.valueOf(
+                Objects.requireNonNull(getArguments()).getInt(BUNDLE_ACCENT_COLOR)));
 
+        Log.e("Z_", "color= " + getArguments().getInt(BUNDLE_ACCENT_COLOR));
+
+        fab.setOnClickListener(view1 -> {
             EditText subject_et = ((TextInputLayout) rootView.findViewById(
                     R.id.textInputLayout_subject)).getEditText();
             EditText description_et = ((TextInputLayout) rootView.findViewById(

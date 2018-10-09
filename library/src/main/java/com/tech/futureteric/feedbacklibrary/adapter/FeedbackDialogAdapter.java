@@ -2,6 +2,7 @@ package com.tech.futureteric.feedbacklibrary.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
@@ -17,11 +18,15 @@ import com.tech.futureteric.feedbacklibrary.ui.FeedbackSystemActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
-import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ENABLE_COLORFUL_FEEDBACK;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CONTACT_US_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CUSTOM_COLORS_LIST;
-import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTION_COLOR;
-import static com.tech.futureteric.feedbacklibrary.utils.UiUtils.getSectionColorId;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ENABLE_COLORFUL_FEEDBACK;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FAQ_THEME;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FEATURE_REQUEST_THEME;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_THEME;
+import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getPrimaryColor;
 
 public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAdapter.ViewHolder>{
 
@@ -59,9 +64,6 @@ public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAd
         viewHolder.button.setText(sectionName);
         viewHolder.button.setOnClickListener(view -> {
             mBundle.putInt(BUNDLE_CLICKED_SECTION, i);
-            mBundle.putInt(BUNDLE_SECTION_COLOR, getSectionColorId(view.getContext(), sectionName,
-                    mBundle.getIntegerArrayList(BUNDLE_CUSTOM_COLORS_LIST), i));
-
             Intent intent = new Intent(view.getContext(), FeedbackSystemActivity.class);
             intent.putExtras(mBundle);
             view.getContext().startActivity(intent);
@@ -79,15 +81,29 @@ public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAd
 
         if (customColorsList == null) {
             if (sectionName.equals(context.getString(R.string.label_frequently_asked_questions)))
-                viewHolder.button.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.faqBtn_900));
+                viewHolder.button.setBackgroundTintList(ColorStateList.valueOf(
+                        getPrimaryColor(viewHolder.itemView.getContext(), BUNDLE_FAQ_THEME,
+                                R.style.FaqSectionTheme, mBundle)));
+
             else if (sectionName.equals(context.getString(R.string.label_feature_request)))
-                viewHolder.button.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.featureRequestBtn_A700));
+                viewHolder.button.setBackgroundTintList(ColorStateList.valueOf(
+                        getPrimaryColor(viewHolder.itemView.getContext(), BUNDLE_FEATURE_REQUEST_THEME,
+                                R.style.FeatureRequestSectionTheme, mBundle)));
+
             else if (sectionName.equals(context.getString(R.string.label_general_feedback)))
-                viewHolder.button.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.generalFeedbackBtn_900));
+                viewHolder.button.setBackgroundTintList(ColorStateList.valueOf(
+                        getPrimaryColor(viewHolder.itemView.getContext(), BUNDLE_GENERAL_FEEDBACK_THEME,
+                                R.style.GeneralFeedbackSectionTheme, mBundle)));
+
             else if (sectionName.equals(context.getString(R.string.label_bug_report)))
-                viewHolder.button.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.bugReportBtn_A700));
+                viewHolder.button.setBackgroundTintList(ColorStateList.valueOf(
+                        getPrimaryColor(viewHolder.itemView.getContext(), BUNDLE_BUG_REPORT_THEME,
+                                R.style.BugReportSectionTheme, mBundle)));
+
             else if (sectionName.equals(context.getString(R.string.label_contact_us)))
-                viewHolder.button.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.contactUsBtn_900));
+                viewHolder.button.setBackgroundTintList(ColorStateList.valueOf(
+                        getPrimaryColor(viewHolder.itemView.getContext(), BUNDLE_CONTACT_US_THEME,
+                                R.style.ContactUsSectionTheme, mBundle)));
 
         } else {
             if (currentPosition <= customColorsList.size())
@@ -99,4 +115,6 @@ public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAd
         }
 
     }
+
+
 }

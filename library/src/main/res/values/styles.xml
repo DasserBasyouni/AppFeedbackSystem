@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="FaqSectionTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimaryDark">#388E3C</item>
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorAccent">#f1c550</item>
+        <item name="spinnerStyle">@style/FeedbackSpinner</item>
+    </style>
+
+    <style name="FeatureRequestSectionTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimaryDark">#7B1FA2</item>
+        <item name="colorPrimary">#9C27B0</item>
+        <item name="colorAccent">#FF4081</item>
+        <item name="spinnerStyle">@style/FeedbackSpinner</item>
+    </style>
+
+    <style name="GeneralFeedbackSectionTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimaryDark">#E64A19</item>
+        <item name="colorPrimary">#FF5722</item>
+        <item name="colorAccent">#795548</item>
+        <item name="spinnerStyle">@style/FeedbackSpinner</item>
+    </style>
+
+    <style name="BugReportSectionTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimaryDark">#FFA000</item>
+        <item name="colorPrimary">#FFC107</item>
+        <item name="colorAccent">#607D8B</item>
+        <item name="spinnerStyle">@style/FeedbackSpinner</item>
+    </style>
+
+    <style name="ContactUsSectionTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimaryDark">#1976D2</item>
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorAccent">#00BCD4</item>
+        <item name="spinnerStyle">@style/FeedbackSpinner</item>
+    </style>
+
+    <style name="FeedbackSpinner" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
 </resources>

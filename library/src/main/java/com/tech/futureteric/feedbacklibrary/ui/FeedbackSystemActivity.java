@@ -1,11 +1,14 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,17 +19,24 @@ import com.tech.futureteric.feedbacklibrary.adapter.FeedbackSpinnerAdapter;
 import java.util.Objects;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CONTACT_US_EMAIL;
-import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CUSTOM_COLORS_LIST;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CONTACT_US_THEME;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ENABLE_COLORED_STATUS;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FAQ_LIST;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FAQ_THEME;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FEATURE_REQUEST_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FEATURE_REQUEST_USER_UID;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
-import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTION_COLOR;
-import static com.tech.futureteric.feedbacklibrary.utils.UiUtils.getSectionColorId;
+import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getAccentColor;
+import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getPrimaryColor;
+import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getPrimaryDarkColor;
 
 public class FeedbackSystemActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +46,6 @@ public class FeedbackSystemActivity extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setTitle("");
-
-        //setTheme(R.style.FeedbackLibTheme);
 
         setupSpinner();
     }
@@ -54,36 +62,62 @@ public class FeedbackSystemActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String sectionName = (((TextView) view).getText().toString());
+                String sectionName = (((TextView) view).getText().toString()), key = "";
                 Fragment fragment = null;
+                int theme = 0;
 
-                if (sectionName.equals(getString(R.string.label_frequently_asked_questions)))
-                    fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName));
+                if (sectionName.equals(getString(R.string.label_frequently_asked_questions))) {
+                    key = BUNDLE_FAQ_THEME;
+                    theme = bundle.getInt(key, R.style.FaqSectionTheme);
+                    fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName),
+                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
 
-                else if (sectionName.equals(getString(R.string.label_general_feedback)))
-                    fragment = FaqFragment.newInstance(getIntent().getExtras().getStringArrayList(BUNDLE_FAQ_LIST));
-
-                else if (sectionName.equals(getString(R.string.label_bug_report)))
-                    fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName));
-
-                else if (sectionName.equals(getString(R.string.label_contact_us)))
-                    fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName));
-
-                else if (sectionName.endsWith(getString(R.string.label_feature_request)))
+                } else if (sectionName.endsWith(getString(R.string.label_feature_request))) {
+                    key = BUNDLE_FEATURE_REQUEST_THEME;
+                    theme = bundle.getInt(key, R.style.FeatureRequestSectionTheme);
                     fragment = FeatureRequestFragment.newInstance(getIntent().getExtras()
-                            .getInt(BUNDLE_FEATURE_REQUEST_USER_UID));
+                            .getInt(BUNDLE_FEATURE_REQUEST_USER_UID),
+                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
 
-                int sectionColor = getSectionColorId(view.getContext(), sectionName,
-                        bundle.getIntegerArrayList(BUNDLE_CUSTOM_COLORS_LIST), i);
-                bundle.putInt(BUNDLE_SECTION_COLOR, sectionColor);
-                ((FeedbackSpinnerAdapter) spinner.getAdapter()).refreshDropDownViewBackground(sectionColor);
+                } else if (sectionName.equals(getString(R.string.label_general_feedback))) {
+                    key = BUNDLE_GENERAL_FEEDBACK_THEME;
+                    theme = bundle.getInt(key, R.style.GeneralFeedbackSectionTheme);
+                    fragment = FaqFragment.newInstance(getIntent().getExtras().getStringArrayList(BUNDLE_FAQ_LIST),
+                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
 
-                if (fragment != null)
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,
-                        fragment).commit();
+                } else if (sectionName.equals(getString(R.string.label_bug_report))) {
+                    key = BUNDLE_BUG_REPORT_THEME;
+                    theme = bundle.getInt(key, R.style.BugReportSectionTheme);
+                    fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName),
+                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
 
+                } else if (sectionName.equals(getString(R.string.label_contact_us))) {
+                    key = BUNDLE_CONTACT_US_THEME;
+                    theme = bundle.getInt(key, R.style.ContactUsSectionTheme);
+                    fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName),
+                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
+                }
+
+                refreshActivityTheme(theme, key);
+
+                assert fragment != null;
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+            }
+
+            private void refreshActivityTheme(int theme, String key) {
+                if (Objects.requireNonNull(getIntent().getExtras())
+                        .getBoolean(BUNDLE_ENABLE_COLORED_STATUS, false))
+                    enableColoredStatus(getPrimaryDarkColor(FeedbackSystemActivity.this, key, theme, bundle));
+
+                int primaryColor = getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle);
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(
-                        new ColorDrawable(getResources().getColor(bundle.getInt(BUNDLE_SECTION_COLOR))));
+                        new ColorDrawable(primaryColor));
+               ((FeedbackSpinnerAdapter) spinner.getAdapter()).refreshDropDownViewBackground(primaryColor);
             }
 
             private String getSectionEmail(String sectionName) {
@@ -104,6 +138,16 @@ public class FeedbackSystemActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void enableColoredStatus(int color) {
+        // TODO added computability to API API 19+
+        // reference: https://stackoverflow.com/questions/35307531/android-change-status-bar-color-on-pre-lollipop-devices-programatically
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
     }
 
 }

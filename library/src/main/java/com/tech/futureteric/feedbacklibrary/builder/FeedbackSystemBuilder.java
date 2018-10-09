@@ -14,13 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CLICKED_SECTION;
-import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ENABLE_COLORFUL_FEEDBACK;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CONTACT_US_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CONTACT_US_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_CUSTOM_COLORS_LIST;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ENABLE_COLORED_STATUS;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ENABLE_COLORFUL_FEEDBACK;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FAQ_LIST;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FAQ_THEME;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FEATURE_REQUEST_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_FEATURE_REQUEST_USER_UID;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_EMAIL;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
 
 public class FeedbackSystemBuilder {
@@ -40,21 +46,36 @@ public class FeedbackSystemBuilder {
         mSections.add(section.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2"));
 
         if (section instanceof Section.FrequentlyAskedQuestions) {
-            mBundle.putStringArrayList(BUNDLE_FAQ_LIST, (ArrayList<String>)
-                    ((Section.FrequentlyAskedQuestions) section).questionsAndAnswersList);
+            Section.FrequentlyAskedQuestions frequentlyAskedQuestions = (Section.FrequentlyAskedQuestions) section;
+            mBundle.putStringArrayList(BUNDLE_FAQ_LIST,
+                    (ArrayList<String>) frequentlyAskedQuestions.questionsAndAnswersList);
+            if (frequentlyAskedQuestions.theme != 0)
+                mBundle.putInt(BUNDLE_FAQ_THEME, frequentlyAskedQuestions.theme);
 
         } else if (section instanceof Section.FeatureRequest) {
-            EventBus.getDefault().postSticky( ((Section.FeatureRequest) section).firebaseFirestore );
-            mBundle.putInt(BUNDLE_FEATURE_REQUEST_USER_UID, ((Section.FeatureRequest) section).userUid);
+            Section.FeatureRequest featureRequest = (Section.FeatureRequest) section;
+            EventBus.getDefault().postSticky(featureRequest.firebaseFirestore);
+            mBundle.putInt(BUNDLE_FEATURE_REQUEST_USER_UID, featureRequest.userUid);
+            if (featureRequest.theme != 0)
+                mBundle.putInt(BUNDLE_FEATURE_REQUEST_THEME, featureRequest.theme);
 
         } else if (section instanceof Section.GeneralFeedback) {
+            Section.GeneralFeedback generalFeedback = (Section.GeneralFeedback) section;
             mBundle.putString(BUNDLE_GENERAL_FEEDBACK_EMAIL, ((Section.GeneralFeedback) section).email);
+            if (generalFeedback.theme != 0)
+                mBundle.putInt(BUNDLE_GENERAL_FEEDBACK_THEME, generalFeedback.theme);
 
         } else if (section instanceof Section.BugReport) {
-            mBundle.putString(BUNDLE_BUG_REPORT_EMAIL, ((Section.BugReport) section).email);
+            Section.BugReport bugReport = (Section.BugReport) section;
+            mBundle.putString(BUNDLE_BUG_REPORT_EMAIL, bugReport.email);
+            if (bugReport.theme != 0)
+                mBundle.putInt(BUNDLE_BUG_REPORT_THEME, bugReport.theme);
 
         } else if (section instanceof Section.ContactUs) {
-            mBundle.putString(BUNDLE_CONTACT_US_EMAIL, ((Section.ContactUs) section).email);
+            Section.ContactUs contactUs = (Section.ContactUs) section;
+            mBundle.putString(BUNDLE_CONTACT_US_EMAIL, contactUs.email);
+            if (contactUs.theme != 0)
+                mBundle.putInt(BUNDLE_CONTACT_US_THEME, contactUs.theme);
 
         } else
             throw new IllegalArgumentException("Unknown Section Type: " + section);
@@ -98,5 +119,10 @@ public class FeedbackSystemBuilder {
         if (mBundle == null)
             mBundle = new Bundle();
         return mBundle;
+    }
+
+    public FeedbackSystemBuilder enableColoredStatusBar() {
+        getBundle().putBoolean(BUNDLE_ENABLE_COLORED_STATUS, true);
+        return this;
     }
 }
