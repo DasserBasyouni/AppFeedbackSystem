@@ -1,14 +1,12 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.tech.futureteric.feedbacklibrary.R;
 import com.tech.futureteric.feedbacklibrary.constants.LibEnums;
@@ -19,6 +17,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_USER_UID;
 import static com.tech.futureteric.feedbacklibrary.database.FireStoreUtils.addFeatureRequest;
@@ -33,7 +34,7 @@ public class FirestoreForumFragment extends Fragment {
     public FirestoreForumFragment() {}
 
 
-    public static FirestoreForumFragment newInstance(String sectionName) {
+    static FirestoreForumFragment newInstance(String sectionName) {
         FirestoreForumFragment fragment = new FirestoreForumFragment();
         Bundle args = new Bundle();
         args.putString(ARG_SECTION_NAME, sectionName);

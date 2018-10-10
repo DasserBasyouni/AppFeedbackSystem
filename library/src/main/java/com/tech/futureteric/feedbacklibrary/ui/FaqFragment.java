@@ -1,10 +1,6 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +11,11 @@ import com.tech.futureteric.feedbacklibrary.adapter.FaqAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ACCENT_COLOR;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_PRIMARY_COLOR;
 
@@ -24,7 +25,7 @@ public class FaqFragment extends Fragment {
 
     public FaqFragment() {}
 
-    public static FaqFragment newInstance(List<String> faqList, int colorPrimary, int colorAccent) {
+    static FaqFragment newInstance(List<String> faqList, int colorPrimary, int colorAccent) {
         FaqFragment fragment = new FaqFragment();
         Bundle args = new Bundle();
         args.putStringArrayList(ARG_FAQ_LIST, (ArrayList<String>) faqList);

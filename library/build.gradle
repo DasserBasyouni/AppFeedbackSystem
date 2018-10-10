@@ -10,7 +10,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
     buildTypes {
@@ -29,24 +29,25 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // ui
-    implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayuotLib"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation "com.mikepenz:iconics-core:3.1.0"
 
-    // databass
+    // database
     implementation 'com.google.firebase:firebase-firestore:17.1.1'
 
     // other libs
     //implementation 'com.zendesk.belvedere2:belvedere:2.1.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
 
-    // support
-    implementation "com.android.support:appcompat-v7:$versions.supportLib"
-    implementation "com.android.support:support-v4:$versions.supportLib"
-    implementation "com.android.support:design:$versions.supportLib"
+    // android x
+    implementation "androidx.appcompat:appcompat:$versions.androidX"
+    implementation "androidx.legacy:legacy-support-v4:$versions.androidX"
+    implementation "com.google.android.material:material:$versions.androidX"
 
     // fixed versions avoidance
     //implementation "com.android.support:recyclerview-v7:$versions.supportLib"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta01'
 }

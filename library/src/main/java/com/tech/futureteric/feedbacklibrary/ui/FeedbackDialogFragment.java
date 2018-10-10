@@ -3,11 +3,6 @@ package com.tech.futureteric.feedbacklibrary.ui;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +15,12 @@ import com.tech.futureteric.feedbacklibrary.adapter.FeedbackDialogAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class FeedbackDialogFragment extends DialogFragment {
 
@@ -43,7 +44,6 @@ public class FeedbackDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_feedback_dialog, container, false);
 
         Objects.requireNonNull(getDialog().getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        setCancelable(true);
 
         ((TextView)view.findViewById(R.id.textView_dialogTitle))
                 .setText(Objects.requireNonNull(getArguments()).getString(ARG_DIALOG_TITLE));

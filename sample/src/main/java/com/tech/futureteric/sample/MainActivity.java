@@ -1,28 +1,27 @@
 package com.tech.futureteric.sample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.tech.futureteric.feedbacklibrary.builder.FeedbackSystemBuilder;
 import com.tech.futureteric.feedbacklibrary.Section;
+import com.tech.futureteric.feedbacklibrary.builder.FeedbackSystemBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.button) Button button;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+
+        button = findViewById(R.id.button);
 
         List<String> test = new ArrayList<>();
         test.add("testsss");

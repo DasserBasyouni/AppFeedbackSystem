@@ -1,7 +1,5 @@
 package com.tech.futureteric.feedbacklibrary.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,9 @@ import android.widget.TextView;
 import com.tech.futureteric.feedbacklibrary.R;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder>{
 

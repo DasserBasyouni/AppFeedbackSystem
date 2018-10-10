@@ -12,7 +12,7 @@ android {
         versionCode 1
         multiDexEnabled true
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -35,24 +35,17 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:17.1.1'
 
     // ui
-    implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayuotLib"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
 
-    // butterKnife
-    implementation "com.jakewharton:butterknife:$versions.butterKnifeLib"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$versions.butterKnifeLib"
-
-    // support
-    implementation "com.android.support:appcompat-v7:$versions.supportLib"
+    // android x
+    implementation "androidx.appcompat:appcompat:$versions.androidX"
 
     // multi-dex
-    implementation 'com.android.support:multidex:1.0.3'
-
-    // mixed versions avoidance
-    //implementation "com.android.support:recyclerview-v7:$versions.supportLib"
+    implementation 'androidx.multidex:multidex:2.0.0'
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta01'
 }
 
 apply plugin: 'com.google.gms.google-services'

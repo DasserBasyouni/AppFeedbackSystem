@@ -1,11 +1,12 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.tech.futureteric.feedbacklibrary.R;
 
 import java.util.Objects;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_USER_UID;
 

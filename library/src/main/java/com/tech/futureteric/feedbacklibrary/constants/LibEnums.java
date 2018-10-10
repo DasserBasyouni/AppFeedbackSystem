@@ -1,9 +1,9 @@
 package com.tech.futureteric.feedbacklibrary.constants;
 
-import android.support.annotation.IntDef;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 public class LibEnums {
 

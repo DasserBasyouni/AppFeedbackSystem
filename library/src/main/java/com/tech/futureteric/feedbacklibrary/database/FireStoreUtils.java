@@ -1,8 +1,6 @@
 package com.tech.futureteric.feedbacklibrary.database;
 
 import android.app.Activity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -15,6 +13,9 @@ import com.tech.futureteric.feedbacklibrary.adapter.FeatureRequestAdapter;
 import com.tech.futureteric.feedbacklibrary.model.Forum;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class FireStoreUtils {
 

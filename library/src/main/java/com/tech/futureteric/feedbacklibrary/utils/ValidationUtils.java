@@ -1,6 +1,5 @@
 package com.tech.futureteric.feedbacklibrary.utils;
 
-import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.widget.EditText;

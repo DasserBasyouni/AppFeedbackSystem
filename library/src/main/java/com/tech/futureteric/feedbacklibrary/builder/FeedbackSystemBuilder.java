@@ -2,7 +2,6 @@ package com.tech.futureteric.feedbacklibrary.builder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.tech.futureteric.feedbacklibrary.Section;
 import com.tech.futureteric.feedbacklibrary.ui.FeedbackDialogFragment;
@@ -12,6 +11,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_BUG_REPORT_THEME;
@@ -93,7 +94,6 @@ public class FeedbackSystemBuilder {
         if (mSections.size() > 1) {
             FeedbackDialogFragment feedbackDialog = FeedbackDialogFragment
                     .newInstance(dialogTitle, dialogSentence, mSections, mBundle);
-            feedbackDialog.setCancelable(false);
             feedbackDialog.show(activity.getSupportFragmentManager(), null);
 
         }else {

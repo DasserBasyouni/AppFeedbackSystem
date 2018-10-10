@@ -7,6 +7,14 @@ subprojects {
             if (details.requested.group == 'com.android.support'
                     && !details.requested.name.contains('multidex') ) {
                 details.useVersion "$versions.supportLib"
+                details.because 'To avoid mixing versions between other libraries and this one'
+            }
+            if (details.requested.group == 'androidx.media'
+                    || details.requested.group == 'androidx.legacy'
+                    || details.requested.group == 'androidx.recyclerview'
+                    && !details.requested.group.contains('multidex')) {
+                details.useVersion "$versions.androidX"
+                details.because 'To avoid mixing versions between other libraries and those'
             }
         }
     }
@@ -16,7 +24,9 @@ ext{
     versions = [
             supportLib: "28.0.0",
             butterKnifeLib: '8.8.1',
-            constraintLayuotLib: '1.1.3'
+            constraintLayuotLib: '1.1.3',
+            androidX: '1.0.0',
+            androidXArch: '2.0.0'
     ]
 }
 

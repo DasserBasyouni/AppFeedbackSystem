@@ -2,8 +2,6 @@ package com.tech.futureteric.feedbacklibrary.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,9 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ACCENT_COLOR;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_PRIMARY_COLOR;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_USER_UID;
@@ -29,7 +30,7 @@ public class FeatureRequestFragment extends Fragment {
 
     public FeatureRequestFragment() {}
 
-    public static FeatureRequestFragment newInstance(int userUid, int colorPrimary, int colorAccent) {
+    static FeatureRequestFragment newInstance(int userUid, int colorPrimary, int colorAccent) {
         FeatureRequestFragment fragment = new FeatureRequestFragment();
         Bundle args = new Bundle();
         args.putInt(BUNDLE_USER_UID, userUid);
