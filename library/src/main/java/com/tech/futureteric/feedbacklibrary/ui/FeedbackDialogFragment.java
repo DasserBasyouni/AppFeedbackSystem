@@ -37,9 +37,7 @@ public class FeedbackDialogFragment extends DialogFragment {
         return fragment;
     }
 
-
-    @Nullable
-    @Override
+    @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feedback_dialog, container, false);
 
@@ -60,7 +58,7 @@ public class FeedbackDialogFragment extends DialogFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         assert getArguments() != null;
-        recyclerView.setAdapter(new FeedbackDialogAdapter(
+        recyclerView.setAdapter(new FeedbackDialogAdapter(getActivity(),
                         Objects.requireNonNull(getArguments().getStringArrayList(ARG_SECTIONS))
                         ,getArguments()));
 

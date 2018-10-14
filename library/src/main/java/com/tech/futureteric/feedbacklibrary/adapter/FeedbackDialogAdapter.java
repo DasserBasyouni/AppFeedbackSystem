@@ -1,5 +1,6 @@
 package com.tech.futureteric.feedbacklibrary.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -33,10 +34,12 @@ public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAd
 
     private List<String> mFeedbackSections;
     private Bundle mBundle;
+    private final Activity mActivity;
 
-    public FeedbackDialogAdapter(List<String> feedbackSections, Bundle bundle) {
+    public FeedbackDialogAdapter(Activity activity, List<String> feedbackSections, Bundle bundle) {
         mFeedbackSections = feedbackSections;
         mBundle = bundle;
+        mActivity = activity;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,6 +71,7 @@ public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAd
             Intent intent = new Intent(view.getContext(), FeedbackSystemActivity.class);
             intent.putExtras(mBundle);
             view.getContext().startActivity(intent);
+            mActivity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
     }
 

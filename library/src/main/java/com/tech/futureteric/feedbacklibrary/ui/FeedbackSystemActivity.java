@@ -4,8 +4,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,12 +30,14 @@ import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_EMAIL;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_GENERAL_FEEDBACK_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTIONS;
+import static com.tech.futureteric.feedbacklibrary.utils.AnimUtils.changeToolAndStatusBarsColorWithAnimation;
 import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getAccentColor;
 import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getPrimaryColor;
 import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getPrimaryDarkColor;
 
 public class FeedbackSystemActivity extends AppCompatActivity {
 
+    private boolean mSpinnerInitialized;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,19 +105,25 @@ public class FeedbackSystemActivity extends AppCompatActivity {
                 }
 
                 refreshActivityTheme(theme, key);
-
                 assert fragment != null;
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+
             }
 
             private void refreshActivityTheme(int theme, String key) {
-                if (Objects.requireNonNull(getIntent().getExtras())
-                        .getBoolean(BUNDLE_ENABLE_COLORED_STATUS, false))
-                    enableColoredStatus(getPrimaryDarkColor(FeedbackSystemActivity.this, key, theme, bundle));
-
                 int primaryColor = getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle);
-                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(
-                        new ColorDrawable(primaryColor));
+
+                changeToolAndStatusBarsColorWithAnimation(
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                                && Objects.requireNonNull(getIntent().getExtras())
+                                .getBoolean(BUNDLE_ENABLE_COLORED_STATUS, false) ?
+                                getWindow().getStatusBarColor():0,
+                        ((ColorDrawable) findViewById(R.id.toolbar).getBackground()).getColor(),
+                        getPrimaryDarkColor(FeedbackSystemActivity.this, key, theme, bundle),
+                        primaryColor, FeedbackSystemActivity.this, mSpinnerInitialized);
+
+                if (!mSpinnerInitialized) mSpinnerInitialized = true;
+
                ((FeedbackSpinnerAdapter) spinner.getAdapter()).refreshDropDownViewBackground(primaryColor);
             }
 
@@ -135,20 +141,8 @@ public class FeedbackSystemActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) { }
         });
-    }
-
-    private void enableColoredStatus(int color) {
-        // TODO added computability to API API 19+
-        // reference: https://stackoverflow.com/questions/35307531/android-change-status-bar-color-on-pre-lollipop-devices-programatically
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(color);
-        }
     }
 
 }
