@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_ACCENT_COLOR;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_PRIMARY_COLOR;
+import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTION_RES_ID_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_USER_UID;
 import static com.tech.futureteric.feedbacklibrary.database.FireStoreUtils.listenToFeatureRequestListAndUpdateRV;
 
@@ -30,12 +31,13 @@ public class FeatureRequestFragment extends Fragment {
 
     public FeatureRequestFragment() {}
 
-    static FeatureRequestFragment newInstance(int userUid, int colorPrimary, int colorAccent) {
+    static FeatureRequestFragment newInstance(int userUid, int colorPrimary, int colorAccent, int theme) {
         FeatureRequestFragment fragment = new FeatureRequestFragment();
         Bundle args = new Bundle();
         args.putInt(BUNDLE_USER_UID, userUid);
         args.putInt(BUNDLE_PRIMARY_COLOR, colorPrimary);
         args.putInt(BUNDLE_ACCENT_COLOR, colorAccent);
+        args.putInt(BUNDLE_SECTION_RES_ID_THEME, theme);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,7 +57,7 @@ public class FeatureRequestFragment extends Fragment {
 
         if (getArguments() != null) {
             rootView.findViewById(R.id.fab_createFeatureRequest).setOnClickListener(v -> {
-                Intent intent = new Intent(getActivity(), FirestoreForumActivity.class);
+                Intent intent = new Intent(getActivity(), AddFeatureRequestActivity.class);
                 intent.putExtras(getArguments());
                 startActivity(intent);
             });

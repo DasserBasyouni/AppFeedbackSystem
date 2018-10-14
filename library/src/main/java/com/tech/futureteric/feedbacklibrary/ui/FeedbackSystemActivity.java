@@ -83,7 +83,8 @@ public class FeedbackSystemActivity extends AppCompatActivity {
                     fragment = FeatureRequestFragment.newInstance(getIntent().getExtras()
                             .getInt(BUNDLE_FEATURE_REQUEST_USER_UID),
                             getPrimaryColor(FeedbackSystemActivity.this, key, themeResId, bundle),
-                            getAccentColor(FeedbackSystemActivity.this, key, themeResId, bundle));
+                            getAccentColor(FeedbackSystemActivity.this, key, themeResId, bundle),
+                            themeResId);
 
                 } else if (sectionName.equals(getString(R.string.label_general_feedback))) {
                     key = BUNDLE_GENERAL_FEEDBACK_THEME;

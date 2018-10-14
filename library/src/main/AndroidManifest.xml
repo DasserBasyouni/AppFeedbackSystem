@@ -9,9 +9,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!-- TODO test parent activity up button is working the same in api 15 and 16 -->
-        <activity android:name=".ui.FirestoreForumActivity"
-            android:parentActivityName=".ui.FeedbackSystemActivity"
-            tools:targetApi="jelly_bean" />
+        <activity android:name=".ui.AddFeatureRequestActivity"
+            android:label="@string/label_create_request" />
 
     </application>
 

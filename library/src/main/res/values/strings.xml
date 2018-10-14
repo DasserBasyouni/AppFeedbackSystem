@@ -11,5 +11,6 @@
     <string name="label_subject">Subject</string>
     <string name="label_be_the_first_one_to_add_a_feature_request">Be the first one to add a feature request\nthe button is below ;)</string>
     <string name="label_up_vote">Up Vote</string>
+    <string name="label_create_request">Create Request</string>
 
 </resources>
