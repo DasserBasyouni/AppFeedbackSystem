@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.FeedbackSystemActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout
         android:id="@+id/textInputLayout_subject"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -23,9 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_subject" />
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout
         android:id="@+id/textInputLayout_description"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_description" />
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_sendForum"

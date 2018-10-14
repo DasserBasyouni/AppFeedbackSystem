@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -18,7 +20,7 @@ public class FeedbackSpinnerAdapter extends ArrayAdapter<String> {
 
     private final List<String> mSections;
     private final boolean mEnableColorfulFeedback;
-    private int mPrimaryColor;
+    @ColorInt private int mPrimaryColor, mSpinnerTextColor;
 
     public FeedbackSpinnerAdapter(Activity activity, ArrayList<String> sections) {
         super(activity, android.R.layout.simple_spinner_item, sections);
@@ -33,17 +35,14 @@ public class FeedbackSpinnerAdapter extends ArrayAdapter<String> {
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = super.getDropDownView(position, convertView, parent);
-        if (mEnableColorfulFeedback)
+        if (mEnableColorfulFeedback){
             view.setBackgroundColor(mPrimaryColor);
+            ((TextView) view).setTextColor(mSpinnerTextColor);
+        }
         return view;
     }
 
-    public void refreshDropDownViewBackground(int primaryColor){
-        mPrimaryColor = primaryColor;
-    }
-
-    @Nullable
-    @Override
+    @Nullable @Override
     public String getItem(int position) {
         return super.getItem(position);
     }
@@ -53,4 +52,8 @@ public class FeedbackSpinnerAdapter extends ArrayAdapter<String> {
         return mSections.size();
     }
 
+    public void refreshDropDownStyle(int primaryColor, int spinnerTextColor){
+        mPrimaryColor = primaryColor;
+        mSpinnerTextColor = spinnerTextColor;
+    }
 }

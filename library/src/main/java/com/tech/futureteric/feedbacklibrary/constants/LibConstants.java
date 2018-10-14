@@ -10,6 +10,7 @@ public class LibConstants {
     public final static String BUNDLE_ENABLE_COLORED_STATUS = "enable_colored_status";
     public final static String BUNDLE_PRIMARY_COLOR = "primary_color";
     public final static String BUNDLE_ACCENT_COLOR = "accent_color";
+    public final static String BUNDLE_SECTION_RES_ID_THEME = "section_theme_res_id";
 
     public final static String BUNDLE_USER_UID = "user_uid";
 

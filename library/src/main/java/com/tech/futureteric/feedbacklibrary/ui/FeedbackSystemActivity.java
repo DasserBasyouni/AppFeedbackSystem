@@ -1,5 +1,6 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import static com.tech.futureteric.feedbacklibrary.utils.AnimUtils.changeToolAnd
 import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getAccentColor;
 import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getPrimaryColor;
 import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getPrimaryDarkColor;
+import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getSpinnerTextColor;
 
 public class FeedbackSystemActivity extends AppCompatActivity {
 
@@ -65,53 +67,56 @@ public class FeedbackSystemActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String sectionName = (((TextView) view).getText().toString()), key = "";
                 Fragment fragment = null;
-                int theme = 0;
+                int themeResId = 0;
 
                 if (sectionName.equals(getString(R.string.label_frequently_asked_questions))) {
                     key = BUNDLE_FAQ_THEME;
-                    theme = bundle.getInt(key, R.style.FaqSectionTheme);
+                    themeResId = bundle.getInt(key, R.style.FaqSectionTheme);
                     fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName),
-                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
-                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
+                            getPrimaryColor(FeedbackSystemActivity.this, key, themeResId, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, themeResId, bundle)
+                            , themeResId);
 
                 } else if (sectionName.endsWith(getString(R.string.label_feature_request))) {
                     key = BUNDLE_FEATURE_REQUEST_THEME;
-                    theme = bundle.getInt(key, R.style.FeatureRequestSectionTheme);
+                    themeResId = bundle.getInt(key, R.style.FeatureRequestSectionTheme);
                     fragment = FeatureRequestFragment.newInstance(getIntent().getExtras()
                             .getInt(BUNDLE_FEATURE_REQUEST_USER_UID),
-                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
-                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
+                            getPrimaryColor(FeedbackSystemActivity.this, key, themeResId, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, themeResId, bundle));
 
                 } else if (sectionName.equals(getString(R.string.label_general_feedback))) {
                     key = BUNDLE_GENERAL_FEEDBACK_THEME;
-                    theme = bundle.getInt(key, R.style.GeneralFeedbackSectionTheme);
+                    themeResId = bundle.getInt(key, R.style.GeneralFeedbackSectionTheme);
                     fragment = FaqFragment.newInstance(getIntent().getExtras().getStringArrayList(BUNDLE_FAQ_LIST),
-                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
-                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
+                            getPrimaryColor(FeedbackSystemActivity.this, key, themeResId, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, themeResId, bundle));
 
                 } else if (sectionName.equals(getString(R.string.label_bug_report))) {
                     key = BUNDLE_BUG_REPORT_THEME;
-                    theme = bundle.getInt(key, R.style.BugReportSectionTheme);
+                    themeResId = bundle.getInt(key, R.style.BugReportSectionTheme);
                     fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName),
-                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
-                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
+                            getPrimaryColor(FeedbackSystemActivity.this, key, themeResId, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, themeResId, bundle)
+                            , themeResId);
 
                 } else if (sectionName.equals(getString(R.string.label_contact_us))) {
                     key = BUNDLE_CONTACT_US_THEME;
-                    theme = bundle.getInt(key, R.style.ContactUsSectionTheme);
+                    themeResId = bundle.getInt(key, R.style.ContactUsSectionTheme);
                     fragment = EmailForumFragment.newInstance(sectionName, getSectionEmail(sectionName),
-                            getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle),
-                            getAccentColor(FeedbackSystemActivity.this, key, theme, bundle));
+                            getPrimaryColor(FeedbackSystemActivity.this, key, themeResId, bundle),
+                            getAccentColor(FeedbackSystemActivity.this, key, themeResId, bundle)
+                            , themeResId);
                 }
 
-                refreshActivityTheme(theme, key);
+                refreshActivityTheme(themeResId, key, adapterView);
                 assert fragment != null;
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
-
             }
 
-            private void refreshActivityTheme(int theme, String key) {
+            private void refreshActivityTheme(int theme, String key, AdapterView<?> adapterView) {
                 int primaryColor = getPrimaryColor(FeedbackSystemActivity.this, key, theme, bundle);
+                int spinnerTextColor = getSpinnerTextColor(FeedbackSystemActivity.this, key, theme, bundle);
 
                 changeToolAndStatusBarsColorWithAnimation(
                         Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
@@ -124,7 +129,11 @@ public class FeedbackSystemActivity extends AppCompatActivity {
 
                 if (!mSpinnerInitialized) mSpinnerInitialized = true;
 
-               ((FeedbackSpinnerAdapter) spinner.getAdapter()).refreshDropDownViewBackground(primaryColor);
+               ((FeedbackSpinnerAdapter) spinner.getAdapter())
+                       .refreshDropDownStyle(primaryColor, spinnerTextColor);
+                ((TextView) adapterView.getSelectedView()).setTextColor(
+                        getSpinnerTextColor(FeedbackSystemActivity.this, key, theme, bundle));
+                spinner.getBackground().setColorFilter(spinnerTextColor, PorterDuff.Mode.SRC_ATOP);
             }
 
             private String getSectionEmail(String sectionName) {
