@@ -1,5 +1,6 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.mikepenz.iconics.context.IconicsContextWrapper;
 import com.tech.futureteric.feedbacklibrary.R;
 import com.tech.futureteric.feedbacklibrary.adapter.FeedbackSpinnerAdapter;
 
@@ -40,6 +42,11 @@ import static com.tech.futureteric.feedbacklibrary.utils.ThemeUtils.getSpinnerTe
 public class FeedbackSystemActivity extends AppCompatActivity {
 
     private boolean mSpinnerInitialized;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(IconicsContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

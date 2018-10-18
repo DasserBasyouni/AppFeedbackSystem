@@ -31,7 +31,7 @@ public class AnimUtils {
             ColorDrawable background = new ColorDrawable(blended);
             activity.getSupportActionBar().setBackgroundDrawable(background);
         });
-        anim.setDuration(1000).start();
+        anim.setDuration(500).start();
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                 activity.getWindow().setStatusBarColor(statusBarToColor);

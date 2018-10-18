@@ -3,7 +3,6 @@ package com.tech.futureteric.feedbacklibrary.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.tech.futureteric.feedbacklibrary.R;
@@ -24,14 +23,13 @@ public class FeatureRequestAdapter extends RecyclerView.Adapter<FeatureRequestAd
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView featureTitle, featureDescription, votesCount;
-        ImageButton voteUp;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             featureTitle =  itemView.findViewById(R.id.textView_featureTitle);
             featureDescription =  itemView.findViewById(R.id.textView_featureDescription);
             votesCount =  itemView.findViewById(R.id.textView_votesCount);
-            voteUp =  itemView.findViewById(R.id.imageButton_voteUp);
+            //voteUp =  itemView.findViewById(R.id.imageButton_voteUp);
         }
     }
 

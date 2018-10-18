@@ -7,6 +7,8 @@ public class Forum {
     private String title, byUid, description;
     private int voteCount;
 
+    public Forum() {}
+
     public Forum(String byUid, String title, String description) {
         this.byUid = byUid;
         this.title = title;

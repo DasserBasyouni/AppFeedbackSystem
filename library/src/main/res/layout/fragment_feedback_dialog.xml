@@ -6,6 +6,7 @@
     app:cardCornerRadius="16dp"
     android:layout_height="wrap_content">
 
+    <!-- TODO fix layout width and blue line on kitkat mediapadx1 tablet -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

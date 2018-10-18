@@ -1,13 +1,17 @@
 package com.tech.futureteric.feedbacklibrary.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.tech.futureteric.feedbacklibrary.R;
 import com.tech.futureteric.feedbacklibrary.constants.LibEnums;
 import com.tech.futureteric.feedbacklibrary.model.Forum;
@@ -57,8 +61,13 @@ public class FirestoreForumFragment extends Fragment {
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onMessageEvent(FirebaseFirestore db) {
         EventBus.getDefault().unregister(this);
+        FloatingActionButton send_fab = rootView.findViewById(R.id.fab_sendForum);
 
-        rootView.findViewById(R.id.fab_sendForum).setOnClickListener(v -> {
+        send_fab.setImageDrawable(new IconicsDrawable(getContext())
+                .icon(GoogleMaterial.Icon.gmd_done)
+                .color(Color.WHITE)
+                .sizeDp(24));
+        send_fab.setOnClickListener(v -> {
             EditText title = ((TextInputLayout)rootView.findViewById(R.id.textInputLayout_subject)).getEditText();
             EditText description = ((TextInputLayout)rootView.findViewById(R.id.textInputLayout_description)).getEditText();
 

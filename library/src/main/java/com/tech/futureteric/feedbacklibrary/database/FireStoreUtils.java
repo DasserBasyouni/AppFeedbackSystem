@@ -25,26 +25,26 @@ public class FireStoreUtils {
     public static void listenToFeatureRequestListAndUpdateRV(Activity activity, FirebaseFirestore db
             , View rootView) {
 
-        db.collection("FeedbackSystem/Forum/Requests").limit(20)
-                .orderBy("vote", Query.Direction.DESCENDING)
+        db.collection("FeedbackSystem/FeatureRequest/Requests")
+                .orderBy("voteCount", Query.Direction.DESCENDING).limit(20)
                 .addSnapshotListener(activity, (queryDocumentSnapshots, e) -> {
 
                     if (e != null) {
-                        Log.w(TAG, "Listen failed: " + e);
+                        Log.w(TAG, "ListenListen failed: " + e);
                         return;
                     }
 
-                    List<Forum> requests = null;
-                    if (queryDocumentSnapshots != null)
-                        requests = queryDocumentSnapshots.toObjects(Forum.class);
+                    Log.e("Z_", "t3333= " + queryDocumentSnapshots.size());
+                    Log.e("Z_", "t2222t= " + queryDocumentSnapshots.getDocuments().size());
 
+                    List<Forum> requests = queryDocumentSnapshots.toObjects(Forum.class);
                     setupTheView(rootView, requests);
                 });
     }
 
     public static void addFeatureRequest(FirebaseFirestore db,  Forum request) {
-        db.collection("FeedbackSystem/FeatureRequest/Requests")
-                .document().set(request)
+        db.document("FeedbackSystem/FeatureRequest/Requests/" + request.getTitle())
+                .set(request)
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "Feature Request is successfully written!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error writing document", e));
     }

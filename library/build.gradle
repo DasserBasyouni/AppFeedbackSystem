@@ -6,7 +6,8 @@ android {
     }
     compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 15
+        // minSDK is raise to 16 because of com.zendesk.belvedere2:belvedere & com.airbnb.android:lottie
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -44,10 +45,13 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$versions.androidX"
     implementation "com.google.android.material:material:$versions.androidX"
 
-    // fixed versions avoidance
-    //implementation "com.android.support:recyclerview-v7:$versions.supportLib"
+    // ui libraries 
+    implementation 'com.sackcentury:shinebutton:0.2.0'
+    implementation "com.mikepenz:iconics-core:3.1.0"
+    implementation 'com.mikepenz:google-material-typeface:3.0.1.3.original@aar'
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-beta01'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta01'
+    //noinspection GradleDependency
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
 }
