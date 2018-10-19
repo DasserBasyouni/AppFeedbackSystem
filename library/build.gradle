@@ -48,9 +48,4 @@ dependencies {
     implementation 'com.sackcentury:shinebutton:0.2.0'
     implementation "com.mikepenz:iconics-core:3.1.0"
     implementation 'com.mikepenz:google-material-typeface:3.0.1.3.original@aar'
-
-    testImplementation 'junit:junit:4.12'
-    //noinspection GradleDependency
-    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
 }
