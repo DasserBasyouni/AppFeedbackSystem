@@ -12,18 +12,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_SECTION_RES_ID_THEME;
 import static com.tech.futureteric.feedbacklibrary.constants.LibConstants.BUNDLE_USER_UID;
 
-public class AddFeatureRequestActivity extends AppCompatActivity {
+public class CreateFeatureRequestActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(Objects.requireNonNull(getIntent().getExtras()).getInt(BUNDLE_SECTION_RES_ID_THEME));
         super.onCreate(savedInstanceState);
+        // TODO search for just a framlayuot layout in andorid.R.
         setContentView(R.layout.activity_firestore_forum);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.frameLayout_firestoreForum, FirestoreForumFragment
+                .add(R.id.frameLayout_firestoreForum, CreateFeatureRequestFragment
                         .newInstance(Objects.requireNonNull(getIntent().getExtras()).getString(BUNDLE_USER_UID)))
                 .commit();
     }

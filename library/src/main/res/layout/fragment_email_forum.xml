@@ -4,48 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.FeedbackSystemActivity">
 
-    <com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout
-        android:id="@+id/textInputLayout_subject"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="@id/tools"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_subject" />
-    </com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout>
+            android:layout_height="match_parent"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:orientation="vertical">
 
-    <com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout
-        android:id="@+id/textInputLayout_description"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_subject"
-        app:layout_constraintVertical_bias="0.0">
+            <!-- TODO test setTheme() instead of using ThemeableTextInputLayout-->
+            <com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout
+                android:id="@+id/textInputLayout_subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_description" />
-    </com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_subject" />
+            </com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout>
+
+            <com.github.irshulx.Editor
+                android:id="@+id/editor_description"
+                android:layout_width="match_parent"
+                android:paddingEnd="3dp"
+                android:paddingStart="3dp"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@+id/tools"
+                app:placeholder="Start writing here..."
+                app:render_type="Editor" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_sendForum"
@@ -56,9 +57,23 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
-        app:ico_icon="gmd-send"
         app:ico_color="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:ico_icon="gmd-send"
+        app:layout_constraintBottom_toTopOf="@+id/tools"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#e6e6e6"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/nestedScrollView"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include layout="@layout/editor_toolbar_linearlayout_horizontal" />
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

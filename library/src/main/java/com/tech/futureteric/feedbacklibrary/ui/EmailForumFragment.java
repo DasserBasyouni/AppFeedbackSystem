@@ -76,7 +76,7 @@ public class EmailForumFragment extends Fragment {
         fab.setOnClickListener(view1 -> {
             EditText subject_et = subject_til.getEditText();
             EditText description_et = ((TextInputLayout) rootView.findViewById(
-                    R.id.textInputLayout_description)).getEditText();
+                    R.id.editor_description)).getEditText();
 
             assert subject_et != null; assert description_et != null;
             if (isEditTextInputValid(subject_et, LibEnums.TEXT)

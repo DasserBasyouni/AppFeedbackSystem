@@ -63,7 +63,7 @@ public class FeatureRequestFragment extends Fragment {
 
         if (getArguments() != null) {
             rootView.findViewById(R.id.fab_createFeatureRequest).setOnClickListener(v -> {
-                Intent intent = new Intent(getActivity(), AddFeatureRequestActivity.class);
+                Intent intent = new Intent(getActivity(), CreateFeatureRequestActivity.class);
                 intent.putExtras(getArguments());
                 startActivity(intent);
             });

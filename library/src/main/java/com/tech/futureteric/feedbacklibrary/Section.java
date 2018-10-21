@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Section {
 
+    // TODO add Fab buttonts drawable to theme customization
     public static class FrequentlyAskedQuestions extends Section {
         public List<String> questionsAndAnswersList;
         public int theme;
