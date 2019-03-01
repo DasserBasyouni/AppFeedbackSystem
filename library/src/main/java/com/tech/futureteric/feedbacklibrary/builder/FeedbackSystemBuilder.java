@@ -55,7 +55,8 @@ public class FeedbackSystemBuilder {
 
         } else if (section instanceof Section.FeatureRequest) {
             Section.FeatureRequest featureRequest = (Section.FeatureRequest) section;
-            EventBus.getDefault().postSticky(featureRequest.firebaseFirestore);
+            if (featureRequest.firebaseFirestore != null)
+                EventBus.getDefault().postSticky(featureRequest.firebaseFirestore);
             mBundle.putInt(BUNDLE_FEATURE_REQUEST_USER_UID, featureRequest.userUid);
             if (featureRequest.theme != 0)
                 mBundle.putInt(BUNDLE_FEATURE_REQUEST_THEME, featureRequest.theme);

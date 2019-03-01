@@ -3,6 +3,7 @@ package com.tech.futureteric.sample;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.tech.futureteric.feedbacklibrary.Section;
 import com.tech.futureteric.feedbacklibrary.builder.FeedbackSystemBuilder;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         button.setOnClickListener(view -> new FeedbackSystemBuilder()
                 .addSection(new Section.FrequentlyAskedQuestions(test))
-                .addSection(new Section.FeatureRequest(FirebaseFirestore.getInstance(),12345))
+                .addSection(new Section.FeatureRequest(null,12345))
                 .addSection(new Section.GeneralFeedback("dasserbasyouni@gmail.com"))
                 .addSection(new Section.BugReport("dasserbasyouni@gmail.com"))
                 .addSection(new Section.ContactUs("dasserbasyouni@gmail.com"))

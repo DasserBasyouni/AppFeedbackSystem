@@ -29,19 +29,19 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // ui
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation "com.mikepenz:iconics-core:3.1.0"
     implementation 'com.github.irshulx:laser-native-editor:2.3.1'
 
     // database
-    implementation 'com.google.firebase:firebase-firestore:17.1.1'
+    implementation 'com.google.firebase:firebase-firestore:18.1.0'
 
     // other libs
     //implementation 'com.zendesk.belvedere2:belvedere:2.1.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
 
     // android x
-    implementation "androidx.appcompat:appcompat:$versions.androidX"
+    implementation "androidx.appcompat:appcompat:$versions.androidXAppCompact"
     implementation "androidx.legacy:legacy-support-v4:$versions.androidX"
     implementation "com.google.android.material:material:$versions.androidX"
 

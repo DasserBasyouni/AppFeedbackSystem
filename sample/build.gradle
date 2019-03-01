@@ -31,17 +31,17 @@ dependencies {
     implementation project(':library')
 
     // fireBase
-    implementation 'com.google.firebase:firebase-core:16.0.4'
-    implementation 'com.google.firebase:firebase-firestore:17.1.1'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-firestore:18.1.0'
 
     // ui
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
 
     // android x
-    implementation "androidx.appcompat:appcompat:$versions.androidX"
+    implementation "androidx.appcompat:appcompat:$versions.androidXAppCompact"
 
     // multi-dex
-    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
