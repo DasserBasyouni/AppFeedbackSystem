@@ -23,8 +23,6 @@ public class FaqFragment extends Fragment {
 
     private static final String ARG_FAQ_LIST = "faq_list";
 
-    public FaqFragment() {}
-
     static FaqFragment newInstance(List<String> faqList, int colorPrimary, int colorAccent) {
         FaqFragment fragment = new FaqFragment();
         Bundle args = new Bundle();

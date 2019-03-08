@@ -29,8 +29,6 @@ public class FeatureRequestFragment extends Fragment {
 
     private View rootView;
 
-    public FeatureRequestFragment() {}
-
     static FeatureRequestFragment newInstance(int userUid, int colorPrimary, int colorAccent, int theme) {
         FeatureRequestFragment fragment = new FeatureRequestFragment();
         Bundle args = new Bundle();
