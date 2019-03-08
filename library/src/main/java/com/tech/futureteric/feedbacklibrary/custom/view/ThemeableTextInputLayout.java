@@ -1,4 +1,4 @@
-package com.tech.futureteric.feedbacklibrary.customView;
+package com.tech.futureteric.feedbacklibrary.custom.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

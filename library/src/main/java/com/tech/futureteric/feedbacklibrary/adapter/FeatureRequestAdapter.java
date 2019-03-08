@@ -22,7 +22,7 @@ public class FeatureRequestAdapter extends RecyclerView.Adapter<FeatureRequestAd
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView featureTitle, featureDescription, votesCount;
+        private TextView featureTitle, featureDescription, votesCount;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

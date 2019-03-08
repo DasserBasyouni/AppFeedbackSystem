@@ -36,9 +36,6 @@ public class FeedbackSystemBuilder {
     private List<String> mSections;
     private Bundle mBundle;
 
-    public FeedbackSystemBuilder() {}
-
-
     public FeedbackSystemBuilder addSection(Section section) {
         getBundle().putStringArrayList(BUNDLE_SECTIONS, (ArrayList<String>) mSections);
 

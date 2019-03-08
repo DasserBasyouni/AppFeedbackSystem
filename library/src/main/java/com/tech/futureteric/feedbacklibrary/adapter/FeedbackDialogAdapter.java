@@ -43,7 +43,7 @@ public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAd
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        MaterialButton button;
+        private MaterialButton button;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             button = (MaterialButton) itemView;
@@ -115,7 +115,7 @@ public class FeedbackDialogAdapter extends RecyclerView.Adapter<FeedbackDialogAd
                 viewHolder.button.setBackgroundTintList(ContextCompat
                         .getColorStateList(context, customColorsList.get(currentPosition)));
             else
-                throw new NullPointerException("You must specify all buttons colors of used sections withing using setCustomColorfulFeedback(List<Integer>) - missing color for section button number "
+                throw new IllegalArgumentException("You must specify all buttons colors of used sections withing using setCustomColorfulFeedback(List<Integer>) - missing color for section button number "
                         + currentPosition+1);
         }
 

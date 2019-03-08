@@ -22,7 +22,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder>{
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        private TextView textView;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = (TextView) itemView;

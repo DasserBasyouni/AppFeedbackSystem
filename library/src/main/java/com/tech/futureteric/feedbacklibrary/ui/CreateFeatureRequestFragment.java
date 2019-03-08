@@ -40,9 +40,6 @@ public class CreateFeatureRequestFragment extends Fragment {
     private static final String ARG_SECTION_NAME = "section_name";
     private View rootView;
 
-    public CreateFeatureRequestFragment() {}
-
-
     static CreateFeatureRequestFragment newInstance(String sectionName) {
         CreateFeatureRequestFragment fragment = new CreateFeatureRequestFragment();
         Bundle args = new Bundle();

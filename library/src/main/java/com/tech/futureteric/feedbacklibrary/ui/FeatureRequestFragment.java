@@ -68,7 +68,7 @@ public class FeatureRequestFragment extends Fragment {
                 startActivity(intent);
             });
         } else
-            throw new NullPointerException("Bundle is equal to null");
+            throw new IllegalArgumentException("Bundle is equal to null");
 
         return rootView;
     }

@@ -24,7 +24,7 @@
             android:orientation="vertical">
 
             <!-- TODO test setTheme() instead of using ThemeableTextInputLayout-->
-            <com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout
+            <com.tech.futureteric.feedbacklibrary.custom.view.ThemeableTextInputLayout
                 android:id="@+id/textInputLayout_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/label_subject" />
-            </com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout>
+            </com.tech.futureteric.feedbacklibrary.custom.view.ThemeableTextInputLayout>
 
             <com.github.irshulx.Editor
                 android:id="@+id/editor_description"

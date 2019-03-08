@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
-import com.tech.futureteric.feedbacklibrary.customView.ThemeableTextInputLayout;
+import com.tech.futureteric.feedbacklibrary.custom.view.ThemeableTextInputLayout;
 import com.tech.futureteric.feedbacklibrary.R;
 import com.tech.futureteric.feedbacklibrary.constants.LibEnums;
 
@@ -33,8 +33,6 @@ public class EmailForumFragment extends Fragment {
     private static final String ARG_SECTION_NAME = "section_name";
     private static final String ARG_RECEIVER_EMAIL = "receiver_email";
 
-    public EmailForumFragment() {}
-
     static EmailForumFragment newInstance(String sectionName, String receiverEmail,
                                           int colorPrimary, int colorAccent, int theme) {
         EmailForumFragment fragment = new EmailForumFragment();
@@ -54,7 +52,9 @@ public class EmailForumFragment extends Fragment {
         ThemeableTextInputLayout.setTheme(getArguments().getInt(BUNDLE_SECTION_RES_ID_THEME));
         View rootView = inflater.inflate(R.layout.fragment_email_forum, container, false);
 
-        String sectionName = null, receiverEmail = null;
+        String sectionName = null;
+        String receiverEmail = null;
+
         if (getArguments() != null){
             sectionName = getArguments().getString(ARG_SECTION_NAME);
             receiverEmail = getArguments().getString(ARG_RECEIVER_EMAIL);

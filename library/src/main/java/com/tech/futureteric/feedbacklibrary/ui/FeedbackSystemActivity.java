@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mikepenz.iconics.context.IconicsContextWrapper;
 import com.tech.futureteric.feedbacklibrary.R;
@@ -72,7 +73,8 @@ public class FeedbackSystemActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String sectionName = (((TextView) view).getText().toString()), key = "";
+                String sectionName = (((TextView) view).getText().toString());
+                String key = "";
                 Fragment fragment = null;
                 int themeResId = 0;
 
@@ -158,7 +160,9 @@ public class FeedbackSystemActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) { }
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(FeedbackSystemActivity.this, "Nothing is selected", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
